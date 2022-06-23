@@ -52,7 +52,7 @@ public class DateUtil {
     public static void main(String[] args) throws ParseException {
 
         //调用时间转换为时间戳的方法
-        String date = dateToStamp("2022-09-07 00:00:00");
+        String date = dateToStamp("2022-05-07 00:00:00");
         System.out.println(date);
 
         // 调用 时间戳转换为时间的方法
