@@ -150,13 +150,7 @@
                 <repackage.classifier>exec</repackage.classifier>
                 <native-buildtools.version>0.9.11</native-buildtools.version>
             </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.junit.platform</groupId>
-                    <artifactId>junit-platform-launcher</artifactId>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
+
             <build>
                 <plugins>
                     <plugin>
