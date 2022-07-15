@@ -48,6 +48,6 @@ public class ByteSIzeUtil {
 
     public static void main(String[] args) {
 
-        System.out.println(getPrintSize(1407491138) + "     数据转换成功");
+        System.out.println(getPrintSize(107096649) + "     数据转换成功");
     }
 }
