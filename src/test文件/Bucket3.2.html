@@ -1,0 +1,2993 @@
+<html>
+<head>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta content="text/css" http-equiv="Content-Style-Type">
+    <title>Bucket3.2</title>
+</head>
+<body>
+<h1 align="center" class="root">
+    <a href="https://modao.cc/app/os8Jxpipr9hs4yG4lrbcC#screen=sl1bqa5xdn0blag" name="2njlhqgul21q20d651g20i2knc">Bucket3.2</a>
+</h1>
+<div align="center" class="globalOverview">
+    <img src="Bucket3.2_files/images/Bucket3.2.jpg"></div>
+<div class="notesContainer">
+    <p>需求描述:</p>
+    <p>1.支持碎片管理.</p>
+    <p>2.支持文件夹上传,文件夹CID(Root CID 加文件夹访问).</p>
+    <p>3.优化上传文件流程,实现暂停删除.</p>
+    <p>4.数据统计模块.</p>
+    <p>5.增加任务列表.</p>
+    <p>6.上传列表.</p>
+    <p>7.删除列表.</p>
+    <p>8.通过CID 或者ARHash直接上传内容.</p>
+</div>
+<h2 class="topic">
+    <a name="3cplmlffoehq1ep0s0fthh45gr">Bucket list</a>
+</h2>
+<p class="relationships">参见: <a href="#5hajbmcd018vkt5j6cbga3fc5m">登录</a>
+</p>
+<h3 class="topic">
+    <a name="053h2tngmlko11sprbln1ii7qb">&nbsp;UI布局</a>
+</h3>
+<h3 class="topic">
+    <a name="64v5udutssrg3eirqbo0nqbncl">&nbsp;&nbsp;搜索区域</a>
+</h3>
+<h3 class="topic">
+    <a name="3kthg1oj9u3as5vrcbn26m1m92">&nbsp;&nbsp;&nbsp;搜索框默认文案</a>
+</h3>
+<h3 class="topic">
+    <a name="7skb79d9qvtmn16c0um1o2tk2n">&nbsp;&nbsp;&nbsp;&nbsp;Search</a>
+</h3>
+<h3 class="topic">
+    <a name="7nc5gh1ol000lcnmg6aquuokn8">&nbsp;&nbsp;整个界面UI布局完整,线条完整,无错别字</a>
+</h3>
+<h3 class="topic">
+    <a name="444k7gr5jtquin62l33q8bu37i">&nbsp;&nbsp;进入Bucket列表,右上角就显示 "Task List"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="0us1goajkhslko90fb1hg5vpoh">&nbsp;&nbsp;&nbsp;点击"Task List"按钮</a>
+</h3>
+<h3 class="topic">
+    <a href="#7e5khc9qvgj4ss0ue8rjl62i4f" name="7opq03b52sqpkq0on3osk8qess">&nbsp;&nbsp;&nbsp;&nbsp;成绩进入任务列表"Task
+        List"界面</a>
+</h3>
+<h3 class="topic">
+    <a name="33lbbt27h0fnlbhrl7o6ad4p3v">&nbsp;搜索</a>
+</h3>
+<h3 class="topic">
+    <a name="247upb2ripngfol8i84rm3h4bt">&nbsp;&nbsp;支持模糊和精确搜索</a>
+</h3>
+<h3 class="topic">
+    <a name="1ujf6t26guq1tf7r67o52v8di7">&nbsp;&nbsp;&nbsp;按照Bucket Name搜索</a>
+</h3>
+<h3 class="topic">
+    <a name="23aesgnk10i86a5qa21cj9lb12">&nbsp;&nbsp;&nbsp;&nbsp;在搜索框输入Bucket Name</a>
+</h3>
+<h3 class="topic">
+    <a name="3e3vncj6c2h810t4udcdmptep9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;有数据</a>
+</h3>
+<h3 class="topic">
+    <a name="0gs28raofkcn3aj7sbvdpjlopf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表正确展示搜索结果,数据准确.</a>
+</h3>
+<h3 class="topic">
+    <a name="08c372jdnctk4lavitedn25g2m">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;观察搜索出结果后,分页数据的正确性</a>
+</h3>
+<h3 class="topic">
+    <a name="2od0go3k7l4s41e9ns38bqqroe">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无数据</a>
+</h3>
+<h3 class="topic">
+    <a name="7kv1ghhkan1mtglbelo66522vk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;显示对应的无结果界面:No buckets</a>
+</h3>
+<h3 class="topic">
+    <a name="6rnafs4jd3jhq9bml7ptr9vgoa">&nbsp;&nbsp;&nbsp;&nbsp;在搜索框输入无效字符，异常符号，空格等内容</a>
+</h3>
+<h3 class="topic">
+    <a name="3bvuv4q2v03are0a7lhtn1bs7a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;需做对应的数据屏蔽处理，无报错以及崩溃信息</a>
+</h3>
+<h3 class="topic">
+    <a name="7hs02263b4eb8o7qa3pie7jmon">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;显示无结果界面:No buckets</a>
+</h3>
+<h3 class="topic">
+    <a name="3vb3m5bjcmv6h810eueegpgqnv">&nbsp;&nbsp;&nbsp;&nbsp;搜索框置空</a>
+</h3>
+<h3 class="topic">
+    <a name="02bnbfvi94pjan7s66pur8sdd0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表显示全部Bucket 信息</a>
+</h3>
+<h3 class="topic">
+    <a name="4jbuq5agb7gmv0e5vvnkavv2a1">&nbsp;&nbsp;&nbsp;&nbsp;多次快速请求搜索功能</a>
+</h3>
+<h3 class="topic">
+    <a name="0dn7mscfo4qfvqos3afebtqjjv">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前后端交互正常</a>
+</h3>
+<h3 class="topic">
+    <a name="6vriqsvloa8cv8cd55cqfasa40">&nbsp;&nbsp;&nbsp;&nbsp;点击搜索框后方的"删除"小图标</a>
+</h3>
+<h3 class="topic">
+    <a name="12ck93dc0f442qg4borcq63hvo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;清除掉输入框已输入的信息</a>
+</h3>
+<h3 class="topic">
+    <a name="7d9cmrbggdd94o3uie7lq2edc2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表显示全部Bucket 信息</a>
+</h3>
+<h3 class="topic">
+    <a name="78sm0ceo0f2td9dcsck8kf33q4">&nbsp;table列表</a>
+</h3>
+<h3 class="topic">
+    <a name="0ve8o46uf3f9p726fsd6pmo3bi">&nbsp;&nbsp;table右上角展示 该列表Bucket的总数量</a>
+</h3>
+<h3 class="topic">
+    <a name="0oaestq6j3dvudgk9rk8or5goh">&nbsp;&nbsp;列表按照添加Bucket的时间倒序排列</a>
+</h3>
+<h3 class="topic">
+    <a name="168lbckdgbqc844n0ca3efpbgk">&nbsp;&nbsp;数据展示</a>
+</h3>
+<h3 class="topic">
+    <a name="7v4knn5afejsiodd9pnuohc3pk">&nbsp;&nbsp;&nbsp;Bucket Name,Capacity,AR Capacity,Past 30 days of traffic,Sync
+        to AR,Past 30 days of visits</a>
+</h3>
+<h3 class="topic">
+    <a name="4c442o8ui4u6ata0jlh595lf8s">&nbsp;&nbsp;&nbsp;&nbsp;注意事项</a>
+</h3>
+<h3 class="topic">
+    <a name="1ca7ggb1ujbfv7vr2m03f27897">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bucket Name栏</a>
+</h3>
+<h3 class="topic">
+    <a name="0gq6so54ubpv805l8b5j90k3gb">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若描述内容过长,显示不下,则显示前10位和后10位,中间省略号表示</a>
+</h3>
+<h3 class="topic">
+    <a name="5ks4arjpelbb58h4hv4gmbqgdp">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Capacity栏</a>
+</h3>
+<h3 class="topic">
+    <a name="1p4qvm4759a32g5jgs6vlufdes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该bucket总占用的存储量含IPFS存储和AR存储，统计保留两位小数。</a>
+</h3>
+<h3 class="topic">
+    <a name="1apdovhnl6v1vatkkuqt68e6up">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果没有,就显示--</a>
+</h3>
+<h3 class="topic">
+    <a name="0nl25sjlovn98su6pmqdmf9ahj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AR Capacity栏</a>
+</h3>
+<h3 class="topic">
+    <a name="34cq9hq0akva5pv29rv4oqjd69">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;显示该bucket下AR的占用的存储容量</a>
+</h3>
+<h3 class="topic">
+    <a name="2uo45cs9ljkcv88s9dg1lts7ug">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;核对其正确性</a>
+</h3>
+<h3 class="topic">
+    <a name="4e6eed58h1oabo5vdgbgqmhclh">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果没有显示--</a>
+</h3>
+<h3 class="topic">
+    <a name="2iknilira5339f33g5rugn9jup">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单位递增依次为B、KB、MB、GB ,1024进到下一个单位</a>
+</h3>
+<h3 class="topic">
+    <a name="58u0j76m0v9qf6u61vji9h04fk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Past 30 days of traffic栏</a>
+</h3>
+<h3 class="topic">
+    <a name="2d9oq4l5rkj5ehf8rnejmpdung">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;统计该Bucket下流量消耗</a>
+</h3>
+<h3 class="topic">
+    <a name="0601t28vucog2f4sjndnm6qg33">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果没有显示--</a>
+</h3>
+<h3 class="topic">
+    <a name="1spjftp3o6ga0qqvimpn8rc0qq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单位递增依次为B、KB、MB、GB ,1024进到下一个单位</a>
+</h3>
+<h3 class="topic">
+    <a name="6e3oo95d6c86voobkh171t69jh">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sync to AR</a>
+</h3>
+<h3 class="topic">
+    <a name="12se7r3i35j4m9t5hlj3pufia3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在添加Bucket界面,如果打开Sync to AR开关</a>
+</h3>
+<h3 class="topic">
+    <a name="3tdf8uin5cqjl3583dp40rcj7s">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;则在Bbucket list列表,该开关显示状态为 打开</a>
+</h3>
+<h3 class="topic">
+    <a name="4kv4uuddhdtaj8jlnthaf809ab">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在添加Bucket界面,如果没有打开Sync to AR开关</a>
+</h3>
+<h3 class="topic">
+    <a name="33ngbca75lsf4spikn9hot3cj0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;则在Bbucket list列表,该开关显示状态为 关闭</a>
+</h3>
+<h3 class="topic">
+    <a name="1sav3g0ku75k3k0gqqaov4ka48">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Past 30 days of visits栏</a>
+</h3>
+<h3 class="topic">
+    <a name="128r8iuomicjirfae8c52u8501">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;统计该bucket下所有文件的近30天访问次数（统计范围自然月，不足一月截止到当天）</a>
+</h3>
+<h3 class="topic">
+    <a name="2nmcc6h6olbt54ir96fjk420t4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;折线图,如果没有显示--</a>
+</h3>
+<h3 class="topic">
+    <a name="1jiaodnms5jook8itqdq7vd6kj">&nbsp;&nbsp;&nbsp;操作</a>
+</h3>
+<h3 class="topic">
+    <a name="1m2f6ig41i8rim1cq8j77uhctg">&nbsp;&nbsp;&nbsp;&nbsp;Sync to AR</a>
+</h3>
+<h3 class="topic">
+    <a name="31olge3uvbc9sjfeqj8j4j4eor">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;打开 开关</a>
+</h3>
+<h3 class="topic">
+    <a name="61v1cq4dhp1s8f6l52ir829mtt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该bucket变为自动同步到AR的bucket</a>
+</h3>
+<h3 class="topic">
+    <a name="2b6qti6u6gurv4hfbn4d74sjkt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果该bucket中未同步AR的所有文件的大小，超过剩余可用AR的存储空间</a>
+</h3>
+<h3 class="topic">
+    <a name="7fs0h866177oua8l7v7vjr0nrg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出提示框</a>
+</h3>
+<h3 class="topic">
+    <a name="76ac1ofjui2oraalo06rf8262h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标题:Alert</a>
+</h3>
+<h3 class="topic">
+    <a name="2f2872nge3i4esmahgues1rfhk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;内容:Insufficient AR
+        storage</a>
+</h3>
+<h3 class="topic">
+    <a name="7prdkr7fkqpir6sbdhsof14i9t">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该开关不可再打开</a>
+</h3>
+<h3 class="topic">
+    <a name="42ndq2bh4vktnf4htneg3m4a7u">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件同步按文件顺序进行同步</a>
+</h3>
+<h3 class="topic">
+    <a name="50c580fi0s0o6jha9aa8b6hcnl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果出现将要同步的文件大小超过剩余AR存储大小，同步状态即为失败（失败原因同步队列中文件大小大于剩余可使用存储空间）同时该文件后面的文件即使小于剩余AR可用存储也同样置为失败，可以在详情或者历史中手动选择再次同步</a>
+</h3>
+<h3 class="topic">
+    <a name="5uc64epd90ech5eptkf90fnln6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果未同步AR的文件大小 小于AR剩余存储</a>
+</h3>
+<h3 class="topic">
+    <a name="6a4c3r7dfe43aontp7gaorjf3h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出提示框</a>
+</h3>
+<h3 class="topic">
+    <a name="2dju3p3bktr41mrcfn57o9qbbg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标题:Sync to AR</a>
+</h3>
+<h3 class="topic">
+    <a name="5r6fvr83lcrekm9kch8d044le2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;内容:Supports all AR public
+        gateway access
+        Permanent storage is not removable, and file sizes are
+        limited to 100M
+        Consumes AR storage </a>
+</h3>
+<h3 class="topic">
+    <a name="0c69e3disb0nelnbj6ih4nd5cj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开关成功打开</a>
+</h3>
+<h3 class="topic">
+    <a name="4btel959babv2b85hg5vs0kn64">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件同步按文件顺序进行同步</a>
+</h3>
+<h3 class="topic">
+    <a name="7db5u7tblq88g7m20t8ehfgbif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭 开关</a>
+</h3>
+<h3 class="topic">
+    <a name="54mi33e2pvaf9tse04thnk7kma">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该bucket变为不会自动同步到AR的bucket</a>
+</h3>
+<h3 class="topic">
+    <a name="3lgskjtv50emqdo7njv7qk3fer">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已经pending中的不受影响，接下来再上传的文件不会受AR存储大小限制并且不会同步到AR</a>
+</h3>
+<h3 class="topic">
+    <a name="273o25i6eh5dt3qtcmp4hikit2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果bucket内还有文件正在syncing中提醒关闭会持续到syncing状态全部结束</a>
+</h3>
+<h3 class="topic">
+    <a name="1ub9jbhndofvrs2pqk5lg0gra3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出提示框</a>
+</h3>
+<h3 class="topic">
+    <a name="088h8hmq0054f9pntvhvpo8o9t">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提示框内容:When you close sync
+        to AR, it will become closing status, and you won't be able to properly close it until all your files have been
+        synchronized. Are you sure you want to close it? </a>
+</h3>
+<h3 class="topic">
+    <a name="3mtsuqr07c490i18sf2qi1mmd3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"确定"</a>
+</h3>
+<h3 class="topic">
+    <a name="2eggr7hm4omchbof5rp2hqicug">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sync to
+        AR不可再点击光标移动提示关闭中的状态标签，直到syncing全部完成，开关关闭且再上传文件跟普通bucket一样。</a>
+</h3>
+<h3 class="topic">
+    <a name="2vg0r5758i6ooi9n8atqknbrnr">&nbsp;&nbsp;&nbsp;&nbsp;选择某一个bucket,点击bucket name,进入详情界面</a>
+</h3>
+<h3 class="topic">
+    <a href="#5btnsqqrcam9ssleegtcvgmadh" name="6kgq21c38n1ltt3b46r5ehca0v">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overview</a>
+</h3>
+<h3 class="topic">
+    <a href="#0k2splp1a5qvcnmv36o1i3uod4" name="6da04hhkbq7jeaog05irsdl48m">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files</a>
+</h3>
+<h3 class="topic">
+    <a href="#55phgccoa01hl6oifqlsl77r50" name="1bif6dbrbsge1ga9n0uclpkv2b">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Statistics</a>
+</h3>
+<h3 class="topic">
+    <a name="5btnsqqrcam9ssleegtcvgmadh">&nbsp;Overview</a>
+</h3>
+<h3 class="topic">
+    <a name="1m6teku8pmjdkf9fj69hv0qojm">&nbsp;&nbsp;UI布局</a>
+</h3>
+<h3 class="topic">
+    <a name="3mndj7pa38k67k8q5d138o2qei">&nbsp;&nbsp;&nbsp;详情界面顶部菜单页切正常,快速切换后正常跳转至对应界面,数据响应正常,无报错信息</a>
+</h3>
+<h3 class="topic">
+    <a name="5c7muv57ocs7v2vida0ql9l9h9">&nbsp;&nbsp;&nbsp;整个界面UI布局完整,线条完整,无错别字</a>
+</h3>
+<h3 class="topic">
+    <a name="60qhm06g5r9erhdolguohsc3n4">&nbsp;&nbsp;Basic Statistics</a>
+</h3>
+<h3 class="topic">
+    <a name="4pugf3251dar9bjepmv1jpcc4j">&nbsp;&nbsp;&nbsp;Storage Usage</a>
+</h3>
+<h3 class="topic">
+    <a name="5e72si7vbi0nvuqhb3o58komni">&nbsp;&nbsp;&nbsp;&nbsp;展示的是该bucket下,文件存储已使用的容量</a>
+</h3>
+<h3 class="topic">
+    <a name="6toe2m0u9rl1g8rreqn99ehiq6">&nbsp;&nbsp;&nbsp;&nbsp;单位 为B、KB、MB、GB（GB暂时保留，日后存储增加会有用）1024进到下一个单位</a>
+</h3>
+<h3 class="topic">
+    <a name="3r97go89t8h2eqs7fsaibuavhq">&nbsp;&nbsp;&nbsp;Past 30 days of traffic</a>
+</h3>
+<h3 class="topic">
+    <a name="5b2ec9p2bnkviha866gll06338">&nbsp;&nbsp;&nbsp;&nbsp;统计该Bucket下流量消耗</a>
+</h3>
+<h3 class="topic">
+    <a name="7jjbe8a2k7b4huq439abbs1m83">&nbsp;&nbsp;&nbsp;&nbsp;如果没有显示--</a>
+</h3>
+<h3 class="topic">
+    <a name="0cgdbv0gvhljer9m9kti9msh6k">&nbsp;&nbsp;&nbsp;&nbsp;单位递增依次为B、KB、MB、GB ,1024进到下一个单位</a>
+</h3>
+<h3 class="topic">
+    <a name="7o21t3ouac1ebncps8r4cvm6kq">&nbsp;&nbsp;&nbsp;Past 30 days of visits</a>
+</h3>
+<h3 class="topic">
+    <a name="2qdoso2qmds9ijt461tsbdrm92">&nbsp;&nbsp;&nbsp;&nbsp;统计该bucket下所有文件的近30天访问次数（统计范围自然月，不足一月截止到当天）</a>
+</h3>
+<h3 class="topic">
+    <a name="019rl0iiaif3osgmq19o3s1fp0">&nbsp;&nbsp;&nbsp;&nbsp;如果没有显示--</a>
+</h3>
+<h3 class="topic">
+    <a name="65olcki1cqk3n7n8svpcfter8o">&nbsp;&nbsp;&nbsp;&nbsp;单位递增依次为B、KB、MB、GB ,1024进到下一个单位</a>
+</h3>
+<h3 class="topic">
+    <a name="4me6sj7k9b7svpafb491mvkvv2">&nbsp;&nbsp;&nbsp;Files</a>
+</h3>
+<h3 class="topic">
+    <a name="6h6f12no5i9l4ag9qbfkvf59jn">&nbsp;&nbsp;&nbsp;&nbsp;统计该bucket下所有的文件总数,包含正在实时上传成功的文件数</a>
+</h3>
+<h3 class="topic">
+    <a name="6l4r9c2s6i2p2k8p3s66vp94dh">&nbsp;&nbsp;&nbsp;Parts</a>
+</h3>
+<h3 class="topic">
+    <a name="6mifvt42lmffnvavrnarjpj5vg">&nbsp;&nbsp;&nbsp;&nbsp;统计该bucket下的碎片总数</a>
+</h3>
+<h3 class="topic">
+    <a name="7g09i9m1v2pfi6vsfthq9kjov7">&nbsp;&nbsp;&nbsp;&nbsp;若没有,则显示0</a>
+</h3>
+<h3 class="topic">
+    <a name="3vn1vtelg85eggfia6qfp6e1ae">&nbsp;&nbsp;Domian Names</a>
+</h3>
+<h3 class="topic">
+    <a name="5d6f3nquv5v2k6aorpj8h09cco">&nbsp;&nbsp;&nbsp;展示该bucket下,添加的域名列表</a>
+</h3>
+<h3 class="topic">
+    <a name="2bg9oi1mj9dem7g4okgsdgq4v6">&nbsp;&nbsp;&nbsp;&nbsp;列表数据展示</a>
+</h3>
+<h3 class="topic">
+    <a name="75fmrv2ddjpf6qjttuij6d04sf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;默认域名优先展示在第一行</a>
+</h3>
+<h3 class="topic">
+    <a name="0g8ogkuskqp8l54riq661si3m2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type,Bucket Domain Name,HTTPS,Global Edge
+        Network</a>
+</h3>
+<h3 class="topic">
+    <a name="05hi0d98epd7an3n8r6i8lqru7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意事项</a>
+</h3>
+<h3 class="topic">
+    <a name="3jgc5kkfge8d2phgc2ucmnapv7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type栏</a>
+</h3>
+<h3 class="topic">
+    <a name="4ghjqm7cgroor2ge0rl6c0lnpb">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;默认域名 Assign Domain</a>
+</h3>
+<h3 class="topic">
+    <a name="3gtcfqk7tijjnrsu525u11g2la">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自定义域名 Custom Domain</a>
+</h3>
+<h3 class="topic">
+    <a name="4q417fqn7tv3uupsbkv2m8k13u">&nbsp;&nbsp;Basic Settings</a>
+</h3>
+<h3 class="topic">
+    <a name="6omrne2fm0e482nvbkpv6h9anm">&nbsp;&nbsp;&nbsp;展示该bucket下的一些基础信息</a>
+</h3>
+<h3 class="topic">
+    <a name="2ej91eg6b0dp2h0ngkqish7mk2">&nbsp;&nbsp;&nbsp;&nbsp;数据展示</a>
+</h3>
+<h3 class="topic">
+    <a name="6e9it771l497gbs00qib0dpd8h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create At</a>
+</h3>
+<h3 class="topic">
+    <a name="3ahc0pip9ff93ppar0m1a1uqln">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该bucket的创建时间</a>
+</h3>
+<h3 class="topic">
+    <a name="2a76jn09fhfdj4d632grn3puit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UTC时间 格式:Mar21,2022,14:42</a>
+</h3>
+<h3 class="topic">
+    <a name="5ukfccoggt4pkcg9phhoorn3gf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sync AR</a>
+</h3>
+<h3 class="topic">
+    <a name="4mee2cg3r3plf0i9ln0p738dis">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若Sync to AR是打开状态</a>
+</h3>
+<h3 class="topic">
+    <a name="5hrulcddbe9bvoak0nqml6i6k2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;则显示 ON</a>
+</h3>
+<h3 class="topic">
+    <a name="6jujiqcuvmv1v3s570cav5o89r">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若Sync to AR是关闭状态</a>
+</h3>
+<h3 class="topic">
+    <a name="5s0q7bihuo8fdv9dn8kgvp433g">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;则显示 OFF</a>
+</h3>
+<h3 class="topic">
+    <a name="3ljq5jep0bis3p6nprsdve79nt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Custom Domain</a>
+</h3>
+<h3 class="topic">
+    <a name="7cf4ki313ar1mepcdi70885cq6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若域名只有一个,则只展示一个域名</a>
+</h3>
+<h3 class="topic">
+    <a name="63e17b22cq2j4afs98v2oh2lrj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若域名有多个,则默认展示最新的域名,剩下的根据数量+1,+2...以此类推.</a>
+</h3>
+<h3 class="topic">
+    <a name="34aao60vse3l6nho41a1ivpn8m">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;鼠标移动至数字上</a>
+</h3>
+<h3 class="topic">
+    <a name="2o24778rbnlh0p3itn6vg68kft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可显示出全部域名</a>
+</h3>
+<h3 class="topic">
+    <a name="6ppu884j8ie5b5ev5738jlmvht">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Storage Class</a>
+</h3>
+<h3 class="topic">
+    <a name="55k5c5nlt9ihgle06u89r3eab0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Access Control List(ACL)</a>
+</h3>
+<h3 class="topic">
+    <a name="0k2splp1a5qvcnmv36o1i3uod4">&nbsp;Files</a>
+</h3>
+<h3 class="topic">
+    <a name="3csn328kudq5f7gvu5p92fj1lh">&nbsp;&nbsp;UI布局</a>
+</h3>
+<h3 class="topic">
+    <a name="3k81gqlhp5a298l1pihn7d3mcj">&nbsp;&nbsp;&nbsp;详情界面顶部菜单页切正常,快速切换后正常跳转至对应界面,数据响应正常,无报错信息</a>
+</h3>
+<h3 class="topic">
+    <a name="26n53esc48cai67bvnmnvvf1u6">&nbsp;&nbsp;&nbsp;整个界面UI布局完整,线条完整,无错别字</a>
+</h3>
+<h3 class="topic">
+    <a name="39mopf8ckrunbm1dnak8up71c8">&nbsp;&nbsp;目录信息展示</a>
+</h3>
+<h3 class="topic">
+    <a name="0vr76lr08fmlaftlrhqiure7j6">&nbsp;&nbsp;&nbsp;顶部菜单目录项显示</a>
+</h3>
+<h3 class="topic">
+    <a name="7qsea27qu4ugu8m9lqa0krr282">&nbsp;&nbsp;&nbsp;&nbsp;一级目录:固定显示Bucket</a>
+</h3>
+<h3 class="topic">
+    <a name="5luonfj75rj3fi0nfcl1udntf8">&nbsp;&nbsp;&nbsp;&nbsp;二级目录:Bucket的名字</a>
+</h3>
+<h3 class="topic">
+    <a name="206f5sn7almgncsn48dko35r6d">&nbsp;&nbsp;&nbsp;&nbsp;三级目录:固定显示Upload</a>
+</h3>
+<h3 class="topic">
+    <a name="0s405p57dc3lc1dieuhidpr5uu">&nbsp;&nbsp;&nbsp;&nbsp;四级五级.......等目录是文件夹或者文件名称,以此类推,如果目录过长,则换行展示</a>
+</h3>
+<h3 class="topic">
+    <a name="79be00ft7vn5mpstp3habftqel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击每一级目录</a>
+</h3>
+<h3 class="topic">
+    <a name="1seocmvp3u2iq259oarhfthmu5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可成功跳转至对应目录</a>
+</h3>
+<h3 class="topic">
+    <a name="5m051r28fj40nqgccedb06gr9f">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面展示无异常</a>
+</h3>
+<h3 class="topic">
+    <a name="2h6cvgj4of43hvebcnsdo9tnn4">&nbsp;&nbsp;搜索</a>
+</h3>
+<h3 class="topic">
+    <a name="7tka3nkmb7me14jd0rv6s921d9">&nbsp;&nbsp;&nbsp;支持模糊和精确搜索</a>
+</h3>
+<h3 class="topic">
+    <a name="3b04pcg4ahherjveg711cm60ej">&nbsp;&nbsp;&nbsp;&nbsp;按照文件名称搜索</a>
+</h3>
+<h3 class="topic">
+    <a name="17qu4gslhqv4k18ei3q6maa0ep">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在搜索框输入文件名</a>
+</h3>
+<h3 class="topic">
+    <a name="7ck2f2f29fannha6cnug5r9e2l">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;有数据</a>
+</h3>
+<h3 class="topic">
+    <a name="1jrmjfvl4rple510alidnpp4ak">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表正确展示搜索结果,数据准确.</a>
+</h3>
+<h3 class="topic">
+    <a name="0crs6h6r454h48n8m1lld7ua67">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;观察搜索出结果后,分页数据的正确性</a>
+</h3>
+<h3 class="topic">
+    <a name="1hf85re5ea9kq7g3judnroi3jl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无数据</a>
+</h3>
+<h3 class="topic">
+    <a name="2org0h9qov2pmia90821vutk2r">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;显示对应的无结果界面:No data</a>
+</h3>
+<h3 class="topic">
+    <a name="694v7vunmu68iriflql7entj6i">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在搜索框输入无效字符，异常符号，空格等内容</a>
+</h3>
+<h3 class="topic">
+    <a name="1fkc2i6vejiqslr6pljeacrja2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;需做对应的数据屏蔽处理，无报错以及崩溃信息</a>
+</h3>
+<h3 class="topic">
+    <a name="5iibb0uu59t3k7ealgjfgfg5r7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;显示无结果界面:No data</a>
+</h3>
+<h3 class="topic">
+    <a name="241qkoint0nd01rg5hd4do8qma">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;搜索框置空</a>
+</h3>
+<h3 class="topic">
+    <a name="1qd4bi4c50udqcglsfvhhe6g0p">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表显示全部文件 信息</a>
+</h3>
+<h3 class="topic">
+    <a name="0vvuh4g3v7p524entar9s9q339">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;多次快速请求搜索功能</a>
+</h3>
+<h3 class="topic">
+    <a name="65f4bsvlunevufef35jrkiflak">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;前后端交互正常</a>
+</h3>
+<h3 class="topic">
+    <a name="4ssi9u5kdcs573318tolpe3dm8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击搜索框后方的"删除"小图标</a>
+</h3>
+<h3 class="topic">
+    <a name="26470l3ggiufrg54sfcegcsr19">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;清除掉输入框已输入的信息</a>
+</h3>
+<h3 class="topic">
+    <a name="3ai4h42angvdh22u0e06rfp9lp">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表显示全部文件信息</a>
+</h3>
+<h3 class="topic">
+    <a name="6717jsviusfc01qu1mib9qtaau">&nbsp;&nbsp;table列表</a>
+</h3>
+<h3 class="topic">
+    <a name="4cc9mqepodltgdd0jfmdabjjpu">&nbsp;&nbsp;&nbsp;按照S3的标准排序</a>
+</h3>
+<h3 class="topic">
+    <a name="77708ovjln2vi2qonotprauj6p">&nbsp;&nbsp;&nbsp;数据展示</a>
+</h3>
+<h3 class="topic">
+    <a name="6smk4kk5pjdduvv3ka210cecdt">&nbsp;&nbsp;&nbsp;&nbsp;Name,Size,IPFS Hash,Last Modified,AR Status</a>
+</h3>
+<h3 class="topic">
+    <a name="2ndpmrebaovas4to9hgmfpf0l8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意事项</a>
+</h3>
+<h3 class="topic">
+    <a name="43m05j53f643ks33vi6v918ldl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name</a>
+</h3>
+<h3 class="topic">
+    <a name="2sqbueejfhnveksckbko46vigk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若文件名称过长,头尾显示10位,中间省略号显示</a>
+</h3>
+<h3 class="topic">
+    <a name="43an88ansogcd3bf27ch3bep2k">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size</a>
+</h3>
+<h3 class="topic">
+    <a name="2guhc6g5siuj22v8dleq76s5ok">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;展示文件大小,单位为B、KB、MB、GB ,1024进到下一个单位</a>
+</h3>
+<h3 class="topic">
+    <a name="1dti1ivqi8bbqef6aot0um7bso">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last Modified</a>
+</h3>
+<h3 class="topic">
+    <a name="1136l3atshf8hajes29eq8044p">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UTC时间</a>
+</h3>
+<h3 class="topic">
+    <a name="5bmqf1tipsi3olhlr9b8tnb3lr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AR Status</a>
+</h3>
+<h3 class="topic">
+    <a name="6hr6k83o0aka8qaktv8ggl53qd">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Synced已同步</a>
+</h3>
+<h3 class="topic">
+    <a name="3nv38gspu1uv4nrtlerkjolt8g">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Syncing同步中</a>
+</h3>
+<h3 class="topic">
+    <a name="7k272nnhra0c9s6kbso8ev5g3a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time out超时</a>
+</h3>
+<h3 class="topic">
+    <a name="729gft8p01u66jvhptm76qeb4j">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发起同步30分钟</a>
+</h3>
+<h3 class="topic">
+    <a name="1l3r66a90bdv8taltfpcc072kb">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Failure失败</a>
+</h3>
+<h3 class="topic">
+    <a name="4e9kaaibn9co5vjc861dfvatmv">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Desynced未同步</a>
+</h3>
+<h3 class="topic">
+    <a name="6hdak0dt6vgdqm4cql18i7m448">&nbsp;&nbsp;&nbsp;&nbsp;列表操作</a>
+</h3>
+<h3 class="topic">
+    <a name="7kh1ie2sorqhlfrkcrpjo07a3u">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击文件名以及小眼睛图标</a>
+</h3>
+<h3 class="topic">
+    <a name="0qa8a8fe9jnvni8840nlrf9353">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;跳转至该文件的详细界面</a>
+</h3>
+<h3 class="topic">
+    <a name="70p1dr19vl85bgvo6gprsadqfi">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表展示File info</a>
+</h3>
+<h3 class="topic">
+    <a name="7l99dabu3j2s4olmnrsjkorhcn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name,Size,Last Modified,IPFS
+        Hash,Object URL,AR Hash</a>
+</h3>
+<h3 class="topic">
+    <a name="7fl3h6f0d4eeoehr3tb39lod1a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意事项</a>
+</h3>
+<h3 class="topic">
+    <a name="2tctufdegdegt3f0jhult5nl2j">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size</a>
+</h3>
+<h3 class="topic">
+    <a name="0ofk7r4v28lutb9qveqd14ef53">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;展示文件大小,单位为B、KB、MB、GB
+        ,1024进到下一个单位</a>
+</h3>
+<h3 class="topic">
+    <a name="6u49epo32qih1o2j1liv6mc6sm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last Modified</a>
+</h3>
+<h3 class="topic">
+    <a name="10h1usolpaqvtpa36avnkb7l68">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UTC时间</a>
+</h3>
+<h3 class="topic">
+    <a name="0qg71n2vsq6utf61h89mjjv273">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AR Hash</a>
+</h3>
+<h3 class="topic">
+    <a name="14gbibj5nvohshtprmiv6j8366">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Synced已同步</a>
+</h3>
+<h3 class="topic">
+    <a name="28fha2ta05j19cmqamchp1p2e0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;展示 AR
+        Hash的值</a>
+</h3>
+<h3 class="topic">
+    <a name="0jdulb7vhu37ddgt2g3rfkh0qr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"AR
+        Hash"的值</a>
+</h3>
+<h3 class="topic">
+    <a name="5gofdmr8f3hbp7oei072u8klbq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;另开一个当前浏览器窗口,展示文件</a>
+</h3>
+<h3 class="topic">
+    <a name="1iolku4745u3rs1mpb51m99foc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果文件是图片</a>
+</h3>
+<h3 class="topic">
+    <a name="1gp9utf1lqqus2sfnhlasaur21">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直接可以打开</a>
+</h3>
+<h3 class="topic">
+    <a name="4mseiojfo867gce27upilaivai">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果文件是pdf,doc,excel,mp4等格式,则直接下载文件到本地查看</a>
+</h3>
+<h3 class="topic">
+    <a name="5q4imtlucaj013jv2llethgqug">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击后方AR
+        Hash值的复制小图标</a>
+</h3>
+<h3 class="topic">
+    <a name="5dr0jm0ugvcb4l26laugo62gqt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出悬浮框并提示
+        Copied to clipboard !</a>
+</h3>
+<h3 class="topic">
+    <a name="6j73uph7osmkgask3mov01n6is">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;悬浮框停留在界面3秒左右自动消失</a>
+</h3>
+<h3 class="topic">
+    <a name="5mf2us68ui7u4bf6i2ettc5d2p">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击悬浮框上的
+        "close"按钮,立即关闭悬浮框</a>
+</h3>
+<h3 class="topic">
+    <a name="0m7cm9r8aqpffstjjv2fisfmgn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Syncing同步中</a>
+</h3>
+<h3 class="topic">
+    <a name="24ohad8ls1fgrcb2i7nlk7or8m">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Time
+        out超时</a>
+</h3>
+<h3 class="topic">
+    <a name="5ffnvf0b602oup1su947m6bjgt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发起同步30分钟</a>
+</h3>
+<h3 class="topic">
+    <a name="5vjqmkfsspc8ujof5buivuqo31">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Failure失败</a>
+</h3>
+<h3 class="topic">
+    <a name="711r2vpsek52hhua1ucetogni0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Desynced未同步</a>
+</h3>
+<h3 class="topic">
+    <a name="72qgdv972p92t53v57vqjrq0jh">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IPFS Hash</a>
+</h3>
+<h3 class="topic">
+    <a name="40kuklp9dpgj8ll56d1beaq1ma">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击后方的复制小图标</a>
+</h3>
+<h3 class="topic">
+    <a name="1uec9qced30svip3lgu4lg9ehj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出悬浮框并提示
+        Copied to clipboard !</a>
+</h3>
+<h3 class="topic">
+    <a name="3ot4co30m4dsh57geuf7umr0fm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;悬浮框停留在界面3秒左右自动消失</a>
+</h3>
+<h3 class="topic">
+    <a name="5mdhst2sv3td26kt85dau04obe">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击悬浮框上的
+        "close"按钮,立即关闭悬浮框</a>
+</h3>
+<h3 class="topic">
+    <a name="24trlo1h9dh4td22ut9pp3resk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"IPFS
+        Hash"的值</a>
+</h3>
+<h3 class="topic">
+    <a name="01i7p18f05p129o45ptan6pkp8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;另开一个当前浏览器窗口,展示文件</a>
+</h3>
+<h3 class="topic">
+    <a name="3n4kbfqbmcv96srpijdanbob7v">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果文件是图片</a>
+</h3>
+<h3 class="topic">
+    <a name="1cqel54hbm4p5sd0pc82t3vj85">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直接可以打开</a>
+</h3>
+<h3 class="topic">
+    <a name="1ngca5f0v1ag7vhr9vkb6phvip">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果文件是pdf,doc,excel,mp4等格式,则直接下载文件到本地查看</a>
+</h3>
+<h3 class="topic">
+    <a name="0ls175f1hrok5u0sif5htip769">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object URL</a>
+</h3>
+<h3 class="topic">
+    <a name="5tvpac83fnco639i3vco7fp66g">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击后方的复制小图标</a>
+</h3>
+<h3 class="topic">
+    <a name="7h0gpabeglq3llj31ckjoospc1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出悬浮框并提示
+        Copied to clipboard !</a>
+</h3>
+<h3 class="topic">
+    <a name="6mc12vk6eakuqhfmke9h8ot02u">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;悬浮框停留在界面3秒左右自动消失</a>
+</h3>
+<h3 class="topic">
+    <a name="66cndfto5lh8r8voschk0ve0jj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击悬浮框上的
+        "close"按钮,立即关闭悬浮框</a>
+</h3>
+<h3 class="topic">
+    <a name="35cbe4eu28vq66ni7jaeegb8s9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Object
+        URL"的值</a>
+</h3>
+<h3 class="topic">
+    <a name="7igdmrjeo1bmq5e6ts7bp41dpr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;另开一个当前浏览器窗口,展示文件</a>
+</h3>
+<h3 class="topic">
+    <a name="6v3asf5vssvk0b3igcn2ekctam">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果文件是图片</a>
+</h3>
+<h3 class="topic">
+    <a name="522irr8kr8eck7oo5nr7ojqfia">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;直接可以打开</a>
+</h3>
+<h3 class="topic">
+    <a name="6dnolpe22csp4pjj939sehb1d8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果文件是pdf,doc,excel,mp4等格式,则直接下载文件到本地查看</a>
+</h3>
+<h3 class="topic">
+    <a name="2s4v216si6cn6jgd2hle7epu1e">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表操作</a>
+</h3>
+<h3 class="topic">
+    <a name="2dlrb1nrqvvoqompfkp6958o1k">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Download</a>
+</h3>
+<h3 class="topic">
+    <a name="3mjh67ca2rif2ro1gk3ouk2e0j">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Download"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="4iqef855t528pi348dka8dhsp1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件成功下载到本地</a>
+</h3>
+<h3 class="topic">
+    <a name="4stdi80i2c62cat8fdqvb7tq06">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暴力点击该按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="30a4k85ovo685qkitp518sbgs0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成功下载,无异常</a>
+</h3>
+<h3 class="topic">
+    <a name="2e78pf7q9q4l0aconda0b1u7tq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sync to AR</a>
+</h3>
+<h3 class="topic">
+    <a name="4gg4i5of51vetajrqjucqo17tp">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当状态是"Desynced","Syncing","Time
+        out","Failure"时</a>
+</h3>
+<h3 class="topic">
+    <a name="2voad7dpb78g3b0hcvs0e4mjd6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Sync to
+        AR"按钮高亮显示</a>
+</h3>
+<h3 class="topic">
+    <a name="4i8c9dc4duvlvlaq9tqku31cpr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Sync to
+        AR"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="3nh0m7inf8fdecrfud0rme6651">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该文件变为自动同步到AR</a>
+</h3>
+<h3 class="topic">
+    <a name="76j94p6ku332v1eeeema7cs65t">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果该文件大小，超过剩余可用AR的存储空间</a>
+</h3>
+<h3 class="topic">
+    <a name="4icaq3gcrav8pn2qdk8vnhk7ih">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出提示框</a>
+</h3>
+<h3 class="topic">
+    <a name="52jlm51t85quh0shnqnfpscik9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标题:Alert</a>
+</h3>
+<h3 class="topic">
+    <a name="3v9ovhn3g8f3a0cufd59opk6o3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;内容:Insufficient
+        AR storage</a>
+</h3>
+<h3 class="topic">
+    <a name="7fmabqisio3tv8t04b11e2g6k2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该按钮置灰</a>
+</h3>
+<h3 class="topic">
+    <a name="33320fqmhg2k7mg3d4pch3sivc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件同步按文件顺序进行同步</a>
+</h3>
+<h3 class="topic">
+    <a name="4c47liahlnpmfpol0u4dc6a2la">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果出现将要同步的文件大小超过剩余AR存储大小，同步状态即为失败（失败原因同步队列中文件大小大于剩余可使用存储空间）同时该文件后面的文件即使小于剩余AR可用存储也同样置为失败，可以在详情或者历史中手动选择再次同步</a>
+</h3>
+<h3 class="topic">
+    <a name="1ja79g1hckg71mgi6ltub5nqfs">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果该文件大小
+        小于AR剩余存储</a>
+</h3>
+<h3 class="topic">
+    <a name="2atp3jot050kl79r29pefq8d29">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出提示框</a>
+</h3>
+<h3 class="topic">
+    <a name="1tildr1gpjbk94iedapf2pkb04">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标题:Sync
+        to AR</a>
+</h3>
+<h3 class="topic">
+    <a name="4d19dedvuo9eo08gsu3a5q2500">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;内容:Supports
+        all AR public gateway access
+        Permanent storage is not removable, and file sizes are
+        limited to 100M
+        Consumes AR storage </a>
+</h3>
+<h3 class="topic">
+    <a name="504bo0j2ra0l24d5pkdm5lsc0d">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该按钮高亮显示</a>
+</h3>
+<h3 class="topic">
+    <a name="6iq94i0sanoqlms1j28ed1pob5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件同步按文件顺序进行同步</a>
+</h3>
+<h3 class="topic">
+    <a name="6fnvbh868q81fgkj0o9gkrr4sa">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果出现将要同步的文件大小超过剩余AR存储大小，同步状态即为失败（失败原因同步队列中文件大小大于剩余可使用存储空间）同时该文件后面的文件即使小于剩余AR可用存储也同样置为失败，可以在详情或者历史中手动选择再次同步</a>
+</h3>
+<h3 class="topic">
+    <a name="13rmn68lp23v2okihqafndmk92">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当状态是"Synced"</a>
+</h3>
+<h3 class="topic">
+    <a name="0iua4jbamreqjjdjnbjv10hjos">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Sync to
+        AR"按钮置灰不可点击操作</a>
+</h3>
+<h3 class="topic">
+    <a name="542ufcrgiju6q622p6nv63ntec">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Copy Path</a>
+</h3>
+<h3 class="topic">
+    <a name="04gjo5kgi5eivdsiqptvfuf0bt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Copy Path"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="0a6vmg9hsaok1r6vrn04gkutpu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出悬浮框并提示 Copied to
+        clipboard !</a>
+</h3>
+<h3 class="topic">
+    <a name="0mbjhnca9uqnogp9aao7mfqer0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;悬浮框停留在界面3秒左右自动消失</a>
+</h3>
+<h3 class="topic">
+    <a name="0vek2pe008uh174etl7ns8uv3a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击悬浮框上的
+        "close"按钮,立即关闭悬浮框</a>
+</h3>
+<h3 class="topic">
+    <a name="0bkfc70qb3k183odlaf2si70n7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rename</a>
+</h3>
+<h3 class="topic">
+    <a name="20jvfoo2mqvlnka8kdm42i1sia">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Rename"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="3q781uekjsmm0tusk25bsiu4l3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出修改名字弹框</a>
+</h3>
+<h3 class="topic">
+    <a name="6veg1mm18q5sa0cai3mkepjtev">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文本框默认填充未修改之前的文件全称</a>
+</h3>
+<h3 class="topic">
+    <a name="2ggdcpvtvu0rsdgjs6ln34v9va">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在原有基础上修改名称</a>
+</h3>
+<h3 class="topic">
+    <a name="01aqid85pojhd49ra566tmrdm9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;New
+        Name输入框</a>
+</h3>
+<h3 class="topic">
+    <a name="2begv7vbt4ps6g2vic74duvg6e">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入限制为3~48小写英文字母以及数字构成</a>
+</h3>
+<h3 class="topic">
+    <a name="6084qhnqanpj3c43ejn5utjskb">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文本框下方提示对应的信息</a>
+</h3>
+<h3 class="topic">
+    <a name="3v033jr50e6r2aet67l9cj2bm7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文本框后方的数字提示随着已输入的字符数相应减去</a>
+</h3>
+<h3 class="topic">
+    <a name="6a4g7f8a5tk9nfcpmluiim3sgs">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;同一个文件夹下不可输入已存在的文件名称</a>
+</h3>
+<h3 class="topic">
+    <a name="6lpnasi1rq21ggkj64tb1vintt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入表情符,汉字,横杠,空格以及其它特殊字符</a>
+</h3>
+<h3 class="topic">
+    <a name="70evu6c1a8b6d8m437h6dea7vs">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;程序做处理,没有崩溃信息,无异常,可成功修改</a>
+</h3>
+<h3 class="topic">
+    <a name="477e3okak5nbkduprq080o9goe">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"OK"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="2o5rcsjdg1jpqtuc51jdi3v9de">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出悬浮框并提示Renamed
+        successfully!</a>
+</h3>
+<h3 class="topic">
+    <a name="56n2jjap035tvcrsbl46gop9t9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;悬浮框停留在界面3秒左右自动消失</a>
+</h3>
+<h3 class="topic">
+    <a name="4suhukdsto4k6od7t3o8pn9aha">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击悬浮框上的
+        "close"按钮,立即关闭悬浮框</a>
+</h3>
+<h3 class="topic">
+    <a name="4kd8nfbof1qs3v68r76u8girjl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件名称被成功修改</a>
+</h3>
+<h3 class="topic">
+    <a name="59nqpviude8kmcalvuf7c786jc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暴力点击"OK"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="4a4frfi40soo9m2ot0pejn436d">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只提交一次请求,接口响应正常</a>
+</h3>
+<h3 class="topic">
+    <a name="4hkrq352ihcr71fev6994ms3p8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Cancel"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="0jl4n6e8u08fd9kaiddccpk77h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭当前弹窗</a>
+</h3>
+<h3 class="topic">
+    <a name="7p38drsr0cc70ap8v29ghaki2m">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在原有基础上不修改</a>
+</h3>
+<h3 class="topic">
+    <a name="4f990bf4g3u9khhh5bbo2ha07t">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"OK"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="4rblc6jph03eveahmj50fvuioi">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无异常,name没有修改,和之前一样</a>
+</h3>
+<h3 class="topic">
+    <a name="5hosdlh637sluchl6jajl37m0o">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Cancel"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="66a462nhkktv8dlps9fiid2518">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭当前弹窗</a>
+</h3>
+<h3 class="topic">
+    <a name="02gso45dfde4p8ldmjbgmoml2o">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete</a>
+</h3>
+<h3 class="topic">
+    <a name="6pj9c68n9enbpt8magb0qq8sjq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Delete"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="2s3i1rkaisj7mr58heqab0n6nk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出二次确认删除弹框</a>
+</h3>
+<h3 class="topic">
+    <a name="6b1a4rs041ik4t6kgfifujeuaj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"OK"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="3f3uf4b04i9ni8lb05rb8alh2l">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件被成功从bucket中删除</a>
+</h3>
+<h3 class="topic">
+    <a name="56c2lgl289jo20h3nsrh5jr94p">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件依旧存在AR存储中,未被删除</a>
+</h3>
+<h3 class="topic">
+    <a name="1va9bgs0fev1vst2rllnm9nhde">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Cancel"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="07avo5nlaq9ip5pfnqpc8p946m">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;取消此次操作,关闭当前弹窗</a>
+</h3>
+<h3 class="topic">
+    <a name="542uhqgfduvq5isdvj6jf1f864">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击IPFS Hash以及复制小图标</a>
+</h3>
+<h3 class="topic">
+    <a name="500ao4sh2q701ugk0lj1i1orfm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出悬浮框并提示 Copied to clipboard !</a>
+</h3>
+<h3 class="topic">
+    <a name="6877o2b1u94l9sujlhcvvrahmo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;悬浮框停留在界面3秒左右自动消失</a>
+</h3>
+<h3 class="topic">
+    <a name="5ng0lguf4cav67nvu1s7vhd1d9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击悬浮框上的 "close"按钮,立即关闭悬浮框</a>
+</h3>
+<h3 class="topic">
+    <a name="5d033eatn13osskliof64l96sg">&nbsp;&nbsp;Upload</a>
+</h3>
+<p class="labelsAndMarkers">
+    <img class="marker" src="Bucket3.2_files/images/priority_1.png"></p>
+<h3 class="topic">
+    <a name="55j2f6kpc7j48qpgcr3sf92kpg">&nbsp;&nbsp;&nbsp;点击"Upload"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="2nren38rvffian8dhufok7oou6">&nbsp;&nbsp;&nbsp;&nbsp;跳转至Upload界面 </a>
+</h3>
+<h3 class="topic">
+    <a name="6op0rs1sl0j1pfbijl411d3gqp">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UI布局</a>
+</h3>
+<h3 class="topic">
+    <a name="6fjurr42elamanoe1k9rf8vua0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击顶部的"Task List"按钮</a>
+</h3>
+<h3 class="topic">
+    <a href="#7e5khc9qvgj4ss0ue8rjl62i4f" name="61v79qr0hsv61pi88kt7edlkh0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成功进入到任务列表界面</a>
+</h3>
+<h3 class="topic">
+    <a name="54id7e7pqug65cq7glucmhjkgb">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;整个界面UI布局完整,线条完整,无错别字</a>
+</h3>
+<h3 class="topic">
+    <a name="5hhcig9f35bld84olv4isvp5ph">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反复切换"Current"和"specified"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="3u50cka16olo33ma29n61p7b08">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面交互正常</a>
+</h3>
+<h3 class="topic">
+    <a name="2bfnfd62gatmvgmoq7584sepb0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;进入该界面后,默认选择当前目录上传,"Current"按钮默认高亮显示</a>
+</h3>
+<h3 class="topic">
+    <a name="4rfvjr8na5t50kmnom3voerarr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upload to</a>
+</h3>
+<h3 class="topic">
+    <a name="06c8f3u6vdjpkocitujng56goe">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Current</a>
+</h3>
+<h3 class="topic">
+    <a name="2d91tg4sh25curhn721qmtmitf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Current"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="5fl0seap5dvftrh0ccqer1u5jb">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;默认"Current"按钮高亮显示,"specified"按钮置灰显示</a>
+</h3>
+<h3 class="topic">
+    <a name="3qtrdkli9dvmrv3mcckm9b8vsm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;按钮下方的路径正确展示,文本不可修改,展示当前目录</a>
+</h3>
+<h3 class="topic">
+    <a name="74666pr6mohjn5gop7b7k73vm4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若目录过长,则换行展示</a>
+</h3>
+<h3 class="topic">
+    <a name="0q3691sqq5ea4pj4u2keeub76i">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若上传文件,则文件全部上传至当前目录</a>
+</h3>
+<h3 class="topic">
+    <a name="4p6pml6e8gd98p7k7kgoqlba62">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;specified</a>
+</h3>
+<h3 class="topic">
+    <a name="5tf1i2mpij2bigdv43rhpf3smk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"specified"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="4nfp35k01uiqq8n1h54p0i14ss">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Current"按钮置灰,"specified"按钮高亮显示</a>
+</h3>
+<h3 class="topic">
+    <a name="03spnrkiaagrac8f9o9rb00cpe">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;按钮下方显示为当前根目录,不可修改,后续目录可以手动输入</a>
+</h3>
+<h3 class="topic">
+    <a name="7osq77ssuo3rqt6icg0gaot497">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目录输入框限制</a>
+</h3>
+<p class="labelsAndMarkers">
+    <img class="marker" src="Bucket3.2_files/images/flag_red.png"></p>
+<h3 class="topic">
+    <a name="5d70l6qm1n5u0fbo6nouemc169">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件夹名称只能包含UTF-8字符，不能包含表情符号。</a>
+</h3>
+<h3 class="topic">
+    <a name="32vdpkj922abk5pjpl40c5v27f">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件夹名中使用正斜杠(/)表示文件夹路径。可以通过指定包含多个正斜杠的文件夹名来创建子文件夹。文件夹名不能以正斜杠(/)或连续的反斜杠(\)开头。文件夹名称中不能包含连续的&ldquo;/&rdquo;。</a>
+</h3>
+<h3 class="topic">
+    <a name="7o9p2cgenoh6oepnj5e0krf49r">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;子文件夹名称中不能包含连续的句点(..)。</a>
+</h3>
+<h3 class="topic">
+    <a name="54hvq24k8kcj3t10pg62r34jj9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;长度为1 ~ 254个字符。</a>
+</h3>
+<h3 class="topic">
+    <a name="7ihncmbqbi393qkf84ojmpkmj1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入至最后一级目录时,程序自动添加斜杠</a>
+</h3>
+<h3 class="topic">
+    <a name="06l5js3u1ti2hp7i0v8u097s9u">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;目录输入框后方动态展示已输入的字符总数和可输入的字符总数
+        已输入的字符总数随着已输入的字符相应变化</a>
+</h3>
+<p class="summary">(<a href="#5d70l6qm1n5u0fbo6nouemc169">文件夹名称只能包含UTF-8字符，不能包含表情符号。</a>, <a
+        href="#32vdpkj922abk5pjpl40c5v27f">文件夹名中使用正斜杠(/)表示文件夹路径。可以通过指定包含多个正斜杠的文件夹名来创建子文件夹。文件夹名不能以正斜杠(/)或连续的反斜杠(\)开头。文件夹名称中不能包含连续的&ldquo;/&rdquo;。</a>,
+    <a href="#7o9p2cgenoh6oepnj5e0krf49r">子文件夹名称中不能包含连续的句点(..)。</a>, <a href="#54hvq24k8kcj3t10pg62r34jj9">长度为1 ~
+        254个字符。</a>)</p>
+<h3 class="topic">
+    <a name="3kn609ufm36p700lvtg9gn34t0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击目录输入框后方的"?"小图标</a>
+</h3>
+<h3 class="topic">
+    <a name="1u2v97atetvrjqkqaq7rt7cbln">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;展示目录输入框的提示内容</a>
+</h3>
+<h3 class="topic">
+    <a name="6fkgt3uln4facbtljb2pmsop6p">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.A folder
+        name can contain only UTF-8 characters and cannot contain emojis.
+        2.Forward slashes (/) are used in a folder name to indicate the path of the folder. You can create a subfolder
+        by specifying a folder name that includes multiple forward slashes. A folder name cannot start with a forward
+        slash (/) or consecutive backslashes (\). A folder name cannot contain consecutive forward slashes (/).
+        3.The name of a subfolder cannot contain consecutive periods (..).
+        4.A folder name must be 1 to 254 characters in length.</a>
+</h3>
+<h3 class="topic">
+    <a name="1o452s9q460v9d08eogn1g30kv">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Files to Upload</a>
+</h3>
+<h3 class="topic">
+    <a name="5j1hkj4nesvnsukekl45e8ujr2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;拖拽</a>
+</h3>
+<h3 class="topic">
+    <a name="206sn6af12tdpa1g0f9q00340v">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;左侧区域</a>
+</h3>
+<h3 class="topic">
+    <a name="440v0cd2mf5iudhmas6t85cce6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;拖拽本地文件至上传区域</a>
+</h3>
+<h3 class="topic">
+    <a name="51k5iol501f0ui6d9j6utgo2of">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支持单个或者多个文件/文件夹同时拖拽</a>
+</h3>
+<h3 class="topic">
+    <a href="#1hvo1gbi1dj6kipa0309sp8pes" name="4kp34o19t7dbsao96idd6chfmo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;待上传文件进入到下方扫描列表</a>
+</h3>
+<h3 class="topic">
+    <a name="46d8vf1ktqq61b0t5hnq5dgci6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扫描列表的文件总数量(Number
+        of Files)和文件总大小(Total Size)相应增加,数量正确</a>
+</h3>
+<h3 class="topic">
+    <a name="323qu2psldmhiirddjbqh548vu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果上传的文件名与已有文件名重名，则在扫描列表覆盖已有文件名。</a>
+</h3>
+<h3 class="topic">
+    <a name="57crhu1q2pb74djqm6rl1q2u70">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果单次选择的文件大于10条,则扫描列表需显示分页信息</a>
+</h3>
+<h3 class="topic">
+    <a name="3vpl76eavasdrlbmpak34qt777">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果单次选择的文件小于10条,则扫描列表不需显示分页信息</a>
+</h3>
+<h3 class="topic">
+    <a name="0f5rh511cddb2a4q2jjeegrtlj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;特殊注意事项</a>
+</h3>
+<h3 class="topic">
+    <a name="0fnuq6467fhjtt9bugkrdc4gng">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果拖拽的这个文件 只读权限时</a>
+</h3>
+<h3 class="topic">
+    <a name="4tmbsej8tr3dlg9nodu8q9e0lt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可正常读取文件,并进入扫描列表</a>
+</h3>
+<h3 class="topic">
+    <a name="2efse4e0lnbgu8ltiir4ah5ep9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果拖拽的这个文件 只写权限时</a>
+</h3>
+<h3 class="topic">
+    <a name="464q7m1up57hb6pqc428487nb2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无法选择权限不足的文件或者文件夹,扫描出来文件数为0,无法上传</a>
+</h3>
+<h3 class="topic">
+    <a name="091h93kdsggg111kf2e5dbre9k">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果上传的文件是加密的</a>
+</h3>
+<h3 class="topic">
+    <a name="6h68cfv38u8b63ia5mnvv6irid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;则进入到下方扫描列表</a>
+</h3>
+<h3 class="topic">
+    <a name="11uddj71gp0vq30genrioh6smr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果上传的文件夹是加密的</a>
+</h3>
+<h3 class="topic">
+    <a name="6qfn8ru7ac3en42qq6qhf52nm2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;则文件夹里面包含的所有文件,只算作一个文件,进入到下方扫描列表中</a>
+</h3>
+<h3 class="topic">
+    <a name="0co4ms1hiev3n6iupd6v1b4m26">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单一文件的Size=加密文件夹中所有文件的Size之和</a>
+</h3>
+<h3 class="topic">
+    <a name="6fg6f25cfu23g4pb54ul9l62q6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;右侧区域</a>
+</h3>
+<h3 class="topic">
+    <a name="2knv4sojt50b16o2ehnhf3fmcd">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;展示文件命名规范</a>
+</h3>
+<h3 class="topic">
+    <a name="1mmfrii54k69b9hmd135nde64b">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标题</a>
+</h3>
+<h3 class="topic">
+    <a name="0l0dm4ovpood0a3f6l97q7roat">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加粗黑色字体:File naming
+        conventions</a>
+</h3>
+<h3 class="topic">
+    <a name="35usjoulvcuv456s27p8i5n7kh">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;内容</a>
+</h3>
+<h3 class="topic">
+    <a name="43pec5sdg6ps8q6s0dhke76p2q">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. The file name
+        must be UTF-8-encoded.
+
+        2. The file name is case-sensitive.
+
+        3. The file name must range from 1 to 1,023 bytes in length.
+
+        4. The file name cannot start with a forward slash (/) or two consecutive backslashes (\).</a>
+</h3>
+<h3 class="topic">
+    <a name="09dd94mine1kti9pvm095skdhl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;翻译:
+        1. 文件名必须为utf -8编码。
+
+        2. 文件名区分大小写。
+
+        3.文件名的长度范围是1 ~ 1023。
+
+        4. 文件名不能以正斜杠(/)或两个连续的反斜杠(\)开头。</a>
+</h3>
+<p class="summary">(<a href="#43pec5sdg6ps8q6s0dhke76p2q">1. The file name must be UTF-8-encoded.
+
+    2. The file name is case-sensitive.
+
+    3. The file name must range from 1 to 1,023 bytes in length.
+
+    4. The file name cannot start with a forward slash (/) or two consecutive backslashes (\).</a>)</p>
+<h3 class="topic">
+    <a name="50f3t0e1osfviq7q0r36gmesif">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下方区域</a>
+</h3>
+<h3 class="topic">
+    <a name="4c42kjil4gg9m7let8u0n3vpbn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;展示红色提示</a>
+</h3>
+<h3 class="topic">
+    <a name="7u7o4eeq1nlb9tqnfrc52kar82">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note: If the name of the
+        file to upload is the same as that of an existing file, the existing file is overwritten. 正在AR同步的文件将失败</a>
+</h3>
+<div class="notesContainer">
+    <p>翻译:</p>
+    <p></p>
+    <p>说明:如果上传的文件名与已有文件名重名，则覆盖已有文件名。</p>
+    <p></p>
+    <p></p>
+</div>
+<h3 class="topic">
+    <a name="3fm2qnj4dlo6d0gstnrprn8rfq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;select files</a>
+</h3>
+<h3 class="topic">
+    <a name="6c8u1lf37mn1qd2i395ou4r35l">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"select files"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="4cn098m0ugoh4dd88tgk9qdrqh">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出选择本地文件弹框</a>
+</h3>
+<h3 class="topic">
+    <a name="04hpulilm8h2mfarjf8jmtj8mc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只能选择文件,文件格式不限制</a>
+</h3>
+<h3 class="topic">
+    <a name="7poeq1b7g5a33g0b1jm75vhhmu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支持单个或者多个文件同时选择</a>
+</h3>
+<h3 class="topic">
+    <a href="#1hvo1gbi1dj6kipa0309sp8pes" name="3nqjkahrl86ttb3kpe6qits0h8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;待上传文件进入到下方扫描列表</a>
+</h3>
+<h3 class="topic">
+    <a name="709o22nmophk7dn7m8du7598s3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扫描列表的文件总数量(Number
+        of Files)和文件总大小(Total Size)相应增加,数量正确</a>
+</h3>
+<h3 class="topic">
+    <a name="279h8c8fg6osfe40k6qgaa0e8a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果上传的文件名与已有文件名重名，则在扫描列表覆盖已有文件名。</a>
+</h3>
+<h3 class="topic">
+    <a name="7uajtrke0ql23mr8unlnm29295">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果单次选择的文件大于10条,则扫描列表需显示分页信息</a>
+</h3>
+<h3 class="topic">
+    <a name="3dheoaitdkgr55iaq6gf7vougm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果单次选择的文件小于10条,则扫描列表不需显示分页信息</a>
+</h3>
+<h3 class="topic">
+    <a name="1563r21d8qkn3v0g6viafajm2m">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;特殊注意事项</a>
+</h3>
+<h3 class="topic">
+    <a name="1kqfjn127i74u5k281cj64bvdo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果拖拽的这个文件
+        只读权限时</a>
+</h3>
+<h3 class="topic">
+    <a name="5qop8qqm02g4hl7rsli3uddfgg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可正常读取文件,并进入扫描列表</a>
+</h3>
+<h3 class="topic">
+    <a name="5skpsa1b3u51kht8dp4fkadhrg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果拖拽的这个文件
+        只写权限时</a>
+</h3>
+<h3 class="topic">
+    <a name="1n18otlaj7tsqrguer5q2sdcd8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无法选择权限不足的文件或者文件夹,扫描出来文件数为0,无法上传</a>
+</h3>
+<h3 class="topic">
+    <a name="3om6c3dnlqhksl3i81mti1vd90">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果上传的文件是加密的</a>
+</h3>
+<h3 class="topic">
+    <a name="5aok1omebt8tjvfc0kppdrfmk1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;则进入到下方扫描列表</a>
+</h3>
+<h3 class="topic">
+    <a name="5gvn2uamv12ugp91aeeti0lbm3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;select folders</a>
+</h3>
+<h3 class="topic">
+    <a name="1lnik4u50ee941lriqun29t3qk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"select folders"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="00fdef2a29d7fvoc4dsdnjemku">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出选择本地文件弹框</a>
+</h3>
+<h3 class="topic">
+    <a name="4c2t2iakkat8ctup198ml4gfi8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只能选择文件夹</a>
+</h3>
+<h3 class="topic">
+    <a name="6nqjimn2tqpm092u23nnp95jae">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;支持单个或者多个文件夹同时选择</a>
+</h3>
+<h3 class="topic">
+    <a href="#1hvo1gbi1dj6kipa0309sp8pes" name="3q4olph2p34kk3khjiq8e0gqs6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;待上传文件进入到下方扫描列表</a>
+</h3>
+<h3 class="topic">
+    <a name="7pj0eld3ujin5t09e4baultsf8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扫描列表的文件总数量(Number
+        of Files)和文件总大小(Total Size)相应增加,数量正确</a>
+</h3>
+<h3 class="topic">
+    <a name="2sddl7mnfptevd1ci5g75vf92v">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果上传的文件夹中文件名与已有文件名重名，则在扫描列表覆盖已有文件名。</a>
+</h3>
+<h3 class="topic">
+    <a name="7ulnhk51bspah2lea2pq2flat4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果单次选择的文件夹中包含的文件大于10条,则扫描列表需显示分页信息</a>
+</h3>
+<h3 class="topic">
+    <a name="54vbha7q2lglanovbku67cl4cl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果单次选择的文件夹中包含的文件小于10条,则扫描列表不需显示分页信息</a>
+</h3>
+<h3 class="topic">
+    <a name="6h36br2vjc5a5o7l6fu1fjo2c1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;特殊注意事项</a>
+</h3>
+<h3 class="topic">
+    <a name="2n57r3akvqmgusrfeombf2msuv">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果拖拽的这个文件
+        只读权限时</a>
+</h3>
+<h3 class="topic">
+    <a name="1h329kbkdtkdlr6tc8et55jpd5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可正常读取文件,并进入扫描列表</a>
+</h3>
+<h3 class="topic">
+    <a name="4ghcn1shbrta7occheo9dr1hq8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果拖拽的这个文件
+        只写权限时</a>
+</h3>
+<h3 class="topic">
+    <a name="1jg745t6sinfb0g0c2v2j5rn1r">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;无法选择权限不足的文件或者文件夹,扫描出来文件数为0,无法上传</a>
+</h3>
+<h3 class="topic">
+    <a name="7r89sjsr5d5p3hst54o92ldqcr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果上传的文件夹是加密的</a>
+</h3>
+<h3 class="topic">
+    <a name="5ufumloem9ikjc46pt5ir3b078">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;则文件夹里面包含的所有文件,只算作一个文件,进入到下方扫描列表中</a>
+</h3>
+<h3 class="topic">
+    <a name="2qjn5b5u91k9vjttsk0c1pdit4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单一文件的Size=加密文件夹中所有文件的Size之和</a>
+</h3>
+<h3 class="topic">
+    <a name="0dj3ug3ke0hpspcll9oshkc5or">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;select hash</a>
+</h3>
+<h3 class="topic">
+    <a name="040d4528ljjq94bno64mg04etq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"select hash"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="1hvo1gbi1dj6kipa0309sp8pes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扫描列表</a>
+</h3>
+<h3 class="topic">
+    <a name="316l8j77p0ppdsf87a314nkg56">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扫描列表数据</a>
+</h3>
+<h3 class="topic">
+    <a name="4d7hldaifuq6ma3dop76k7ugn2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若有数据,则默认展示一页10条信息</a>
+</h3>
+<h3 class="topic">
+    <a name="3frk1acblsot50kt1nab8ed2do">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若无数据,则显示No folders or files</a>
+</h3>
+<h3 class="topic">
+    <a name="2o5b2gbh2evhkgdttr5m1ghv9t">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表排序</a>
+</h3>
+<h3 class="topic">
+    <a name="20d865k4160s2of5qk5om8tuk7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果是单个文件上传,持续上传时,最新上传的文件显示在最前面</a>
+</h3>
+<h3 class="topic">
+    <a name="0u69d98qreqvntv3b8052alk0q">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果是多个文件夹同时上传,持续上传时,最新上传的文件夹显示在最前面</a>
+</h3>
+<h3 class="topic">
+    <a name="3q7vpgn28p9p26uojo13rv5h5a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据展示</a>
+</h3>
+<h3 class="topic">
+    <a name="1vt3b87dvjg0la84rpek3c7r57">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</a>
+</h3>
+<h3 class="topic">
+    <a name="6l6ceieoq9od6i89v7u7n49c3m">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件的名称:如果文件名称过长,则显示前20位,后10位,中间省略号展示</a>
+</h3>
+<h3 class="topic">
+    <a name="3fu7qd3of0aij466ittd58pk3n">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size</a>
+</h3>
+<h3 class="topic">
+    <a name="51bsu1er2cc3bbnp9rnlqm2qtd">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件的大小:单位为B、KB、MB、GB
+        1024进到下一个单位</a>
+</h3>
+<h3 class="topic">
+    <a name="1k752duqmovmlpp25b9hpq7vak">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type</a>
+</h3>
+<h3 class="topic">
+    <a name="1t7fr19sspg1ko3jh4so8m83uj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件的格式类型:如 video/mp4 ,
+        image/jpeg 等,根据上传的文件格式自动识别</a>
+</h3>
+<h3 class="topic">
+    <a name="3cf2ash531ks2g9h8ka5524gua">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status</a>
+</h3>
+<h3 class="topic">
+    <a name="511ng3mjsmkdn7751tsblsccuf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件的上传状态</a>
+</h3>
+<p class="labelsAndMarkers">
+    <img class="marker" src="Bucket3.2_files/images/flag_red.png"></p>
+<h3 class="topic">
+    <a name="6ll8la2m5fmets93vhi9a16dj3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果文件扫描完成</a>
+</h3>
+<h3 class="topic">
+    <a name="213aretau838d9crercoaau5fn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;则状态为:ready for
+        upload</a>
+</h3>
+<h3 class="topic">
+    <a name="3ogabv7r48cgslnc4fscti55vi">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;actions</a>
+</h3>
+<h3 class="topic">
+    <a name="5r1cr3at3l16kiq0jg286hna18">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作</a>
+</h3>
+<h3 class="topic">
+    <a name="1qvq8ecr1pf9vl4g7q36sup3ok">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove</a>
+</h3>
+<h3 class="topic">
+    <a name="316204mf4m1drngtks0e3eofr8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Remove"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="17e9v337bqijkj0q0bfde6gvbc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成功移除该文件,已移除的数据不再显示在扫描列表</a>
+</h3>
+<h3 class="topic">
+    <a name="28qaskahkg240t1m4fue00o5pf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扫描列表左上角的文件总数统计和文件总大小的统计,需要根据已移除的文件相应减去</a>
+</h3>
+<h3 class="topic">
+    <a name="3cgm85pro70sb42qlb3e87f1be">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分页数据加载正常,数量正确</a>
+</h3>
+<h3 class="topic">
+    <a name="6siae7cu50qlbh0rorf8liina3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upload</a>
+</h3>
+<h3 class="topic">
+    <a name="2kqk8q0ajptvrm32ff2rd6fbsi">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当扫描列表里存在正在扫描的文件,则"upload"置灰按钮不能点击</a>
+</h3>
+<h3 class="topic">
+    <a name="0tmmt5gga425h27hfmr0m23u8q">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当列表文件都扫描完毕</a>
+</h3>
+<h3 class="topic">
+    <a name="2rtsuopbktfku8b8d7sch2gn9n">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"upload"按钮高亮显示</a>
+</h3>
+<h3 class="topic">
+    <a name="53vok4464aq1rafffqfb6nbmd8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;待上传文件大小需要首先进行剩余存储大小校对包括IPFS和AR，如果超过剩余存储</a>
+</h3>
+<h3 class="topic">
+    <a name="6gv3fv0932rlp9877nkkql1v8d">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"upload"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="0nup6avtddd4gn0d1a45unn80p">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出提示 Alert
+
+        &ldquo;待上传文件超过剩余可用存储空间&rdquo;
+
+        上传任务不执行</a>
+</h3>
+<h3 class="topic">
+    <a name="2nakr9ptlkndceqf1lpt2diuau">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;待上传文件大小如果未超过或者等于剩余存储</a>
+</h3>
+<h3 class="topic">
+    <a name="5le728hlm53d6g6s9s196hktkq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"upload"按钮</a>
+</h3>
+<h3 class="topic">
+    <a href="#7e5khc9qvgj4ss0ue8rjl62i4f" name="38jkqenl3qqf3u0dss9hgmd5d7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扫描列表的数据成功进入到任务列表</a>
+</h3>
+<h3 class="topic">
+    <a name="6hel010f3u4rg1oq8j2lphs8cj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扫描文件列表数据清空,展示无数据界面
+        &ldquo;No files or folders are selected.&rdquo;</a>
+</h3>
+<h3 class="topic">
+    <a name="6esienkc4jeirj086hk42hqu9l">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;扫描列表左上角的文件总数统计和文件总大小的统计,变成0</a>
+</h3>
+<h3 class="topic">
+    <a name="2ecdmg3av6dgr2hku7o75hhinu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分页信息消失</a>
+</h3>
+<h3 class="topic">
+    <a name="18a6ovrgvc6poph84e4e6grtbd">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cancel</a>
+</h3>
+<h3 class="topic">
+    <a name="18ep13qbaeukdso21l018su2ep">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Cancel"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="3b01hlo1la9c6451ns0ms2mda0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;返回到文件管理页面</a>
+</h3>
+<h3 class="topic">
+    <a name="7cid90fk1fr3flpe9etqk3q9f7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分页</a>
+</h3>
+<h3 class="topic">
+    <a name="2u7tds1eil3pvl26ru34ltfr2r">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一页最多显示10条数据</a>
+</h3>
+<h3 class="topic">
+    <a name="1rdbs7a8pfe3c68r6a0ab2b6bv">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若数据小于10条，则只展示一页,跳转分页框默认填充1</a>
+</h3>
+<h3 class="topic">
+    <a name="0s20r2ao1770dlik81s3mv6eki">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若数据大于10条，则显示分页信息</a>
+</h3>
+<h3 class="topic">
+    <a name="2brlrjff94rksi7l36ku2iulqk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据数据量总数，一页10条，自动计算页数</a>
+</h3>
+<h3 class="topic">
+    <a name="4m02ulbginis9u3eoo3jlp5i08">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若当前在第一页，则向前翻动的按钮"&lt;"置灰，不可点击</a>
+</h3>
+<h3 class="topic">
+    <a name="35opn3fdhq5ho0ns2qt829mlle">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若当前在最后一页，则向后翻动的按钮"&gt;"置灰，不可点击</a>
+</h3>
+<h3 class="topic">
+    <a name="0fa4avqq45tj0ugmja39qilp5l">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若页数过多，则省略号显示，根据翻页的页数，自动将省略号变为页数，省略号顺延。</a>
+</h3>
+<h3 class="topic">
+    <a name="3808ng2b0pmt347vrmp927umnr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加快翻页的频率，table数据正确展示，无崩溃及超时情况</a>
+</h3>
+<h3 class="topic">
+    <a name="4ud8e9g919e2tlqd9tnmvlt6vi">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;跳转分页</a>
+</h3>
+<h3 class="topic">
+    <a name="25q3dv9g12hg32agu1ime9m3o9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在跳转分页输入框</a>
+</h3>
+<h3 class="topic">
+    <a name="5fklma11oq89ladgpfo5glk5ee">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只能输入大于0,小于总页数的整数</a>
+</h3>
+<h3 class="topic">
+    <a name="41fti8c5m1u5es148ov43bhoua">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入0</a>
+</h3>
+<h3 class="topic">
+    <a name="42c323uq94gn61kaj1p7cbdbpj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;跳转分页输入框自动填充1</a>
+</h3>
+<h3 class="topic">
+    <a name="5mdqrccme1ap9lfe56l6fpae0i">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入大于总页数的数字</a>
+</h3>
+<h3 class="topic">
+    <a name="5bcn4jepd9l0n8egsng01vb7v3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;跳转分页输入框自动填充最大的页数值</a>
+</h3>
+<h3 class="topic">
+    <a name="0hbb06hd6086vdvbac0glmvl1i">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入英文字母,汉字,空格.小数等异常字符</a>
+</h3>
+<h3 class="topic">
+    <a name="4gk9h6umioi8paqupbgij8a6tk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;程序自动处理,屏蔽掉所有异常,前后端无报错,无崩溃信息</a>
+</h3>
+<h3 class="topic">
+    <a name="6mv4g4rml8270ob5bija70jch7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;跳转分页输入框自动填充1</a>
+</h3>
+<h3 class="topic">
+    <a name="7e5khc9qvgj4ss0ue8rjl62i4f">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;task list</a>
+</h3>
+<h3 class="topic">
+    <a name="6ou2d60vpsk632d4f5cpa594je">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UI布局</a>
+</h3>
+<h3 class="topic">
+    <a name="2ljpsl600oh59ul6i2g3dj6u18">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击顶部的"close"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="011ek45n5j3sbtcotda0l9lsbq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭当前task list界面</a>
+</h3>
+<h3 class="topic">
+    <a name="57m2p6ogps24kscf0lmvkgss3h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;整个界面UI布局完整,线条完整,无错别字</a>
+</h3>
+<h3 class="topic">
+    <a name="6gpf2rkbr9m1nllp03mlh42gij">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反复切换顶部各个菜单页切</a>
+</h3>
+<h3 class="topic">
+    <a name="4t7rjc394ad7qedlqe8tjrhfje">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面交互正常,数据展示正常</a>
+</h3>
+<h3 class="topic">
+    <a name="6m9hanoe4lkckaqfuothphp3t5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tip</a>
+</h3>
+<h3 class="topic">
+    <a name="22glljnlni0pvkvqnluk7o0op8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当只有本地文件上传的或者本地文件上传和Hash文件上传共存的时,显示tip提示</a>
+</h3>
+<h3 class="topic">
+    <a name="1odgk1lfgrbbf7u2s84lrklpr2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"刷新或关闭浏览器会取消当前上传任务，并清除全部记录"</a>
+</h3>
+<h3 class="topic">
+    <a name="3mndsgdjprk13vhc9g8tuqghoq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当只有Hash上传的时候,显示tip提示</a>
+</h3>
+<h3 class="topic">
+    <a name="1g9cb582384p0r2a5odumaeddr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"关闭任务列表将转为离线上传"</a>
+</h3>
+<h3 class="topic">
+    <a name="3cv3qh8j18u1jkvdtpcinluj5m">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upload tasks</a>
+</h3>
+<h3 class="topic">
+    <a name="4c3gohkpapngkdktbnjbqcqp95">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;展示文件上传进度列表</a>
+</h3>
+<h3 class="topic">
+    <a name="1cdajkiilbsu6r69rbn664frpv">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;刷新或关闭浏览器时的限制项</a>
+</h3>
+<h3 class="topic">
+    <a name="1d8drrl91v094cak8l9haabu7p">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本地上传</a>
+</h3>
+<h3 class="topic">
+    <a name="0irh5vj3hc89gfnvva3tcoths7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当任务正在执行时，刷新或者关闭浏览器会取消当前上传任务，并清除全部记录，上传成功的除外</a>
+</h3>
+<h3 class="topic">
+    <a name="4ao0cqv777agjf3ralpls88qg8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash上传</a>
+</h3>
+<h3 class="topic">
+    <a name="2dhl33s7utlnpeq1m2f52penej">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当任务正在执行时，刷新或者关闭浏览器,任务列表可以关闭转为离线下载，完成后任务列表文案变为提醒&ldquo;*个文件上传完成</a>
+</h3>
+<h3 class="topic">
+    <a name="1bueomp9lni39h0sfe4one233q">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当Hash上传文件和本地上传的文件共存时不可关闭或者刷新浏览器，除非本地上传文件完成</a>
+</h3>
+<h3 class="topic">
+    <a name="31avhtjhgrva0sh5r74ffj47sc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table顶部菜单切换 统计项</a>
+</h3>
+<h3 class="topic">
+    <a name="1ekk0627mse5i8hqbigjj90da7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all</a>
+</h3>
+<h3 class="topic">
+    <a name="554hk075f9vm6bmf0c06d6esh6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;统计各个状态下所有文件的总数量</a>
+</h3>
+<h3 class="topic">
+    <a name="64d880ppc33miva3p09cspjpbt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all统计数值=uploading+stopped+uploaded+upload
+        failed所有统计项数值之和</a>
+</h3>
+<h3 class="topic">
+    <a name="66mpn94nbe521mm69dpt8cka0g">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploading</a>
+</h3>
+<h3 class="topic">
+    <a name="5la3artohcsqbqbm9aupfp0icr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;统计所有文件正在上传中的总数量</a>
+</h3>
+<h3 class="topic">
+    <a name="22nl06edkdtmmn299qv6u6dlar">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stopped</a>
+</h3>
+<h3 class="topic">
+    <a name="6orahh6v00jl31lmrvimrorda3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;统计所有文件上传时,状态为
+        暂停的总数量</a>
+</h3>
+<h3 class="topic">
+    <a name="7e7cod3us8g2ndkdmpevv3fhqc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploaded</a>
+</h3>
+<h3 class="topic">
+    <a name="4sa8cqc8i008ioougsnt1qlvlm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;统计所有文件已上传成功的总数量</a>
+</h3>
+<h3 class="topic">
+    <a name="3h84jfhitohriqbn4f3sdj3amt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upload failed</a>
+</h3>
+<h3 class="topic">
+    <a name="43cl7ujgu14r1m9sjbrokh2l3p">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;统计所有文件上传失败的总数量</a>
+</h3>
+<h3 class="topic">
+    <a name="66tngvn2icthf4g2euattta46q">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注意事项</a>
+</h3>
+<h3 class="topic">
+    <a name="512dqjoljsq3bc48qi20pq1uea">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该数据统计是实时变化的,根据上传文件的状态实时增减,点击每一个统计项,下方的table列表都会切换至对应上传状态的界面,进行一系列操作</a>
+</h3>
+<h3 class="topic">
+    <a name="5up2gp0n91cljip38jd9km2q19">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table列表</a>
+</h3>
+<h3 class="topic">
+    <a name="11toj8el146ipvie6e4l81h1lj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件上传列表</a>
+</h3>
+<h3 class="topic">
+    <a name="3sd0olscl64f3ioobaeqbo46bo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若有数据,则默认展示一页10条信息</a>
+</h3>
+<h3 class="topic">
+    <a name="60kkgbgeeoikf0s62vv88tt1kn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若无数据,则显示No data
+        available</a>
+</h3>
+<h3 class="topic">
+    <a name="7ncuakmdmgburhlg9fkmbq1ls1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;每一种文件状态改变,列表里面的数据与分页数据都正确展示</a>
+</h3>
+<h3 class="topic">
+    <a name="2gt4gnk1mtk8ajp9cj0omklas9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暴力点击每一个按钮,数据加载都正常</a>
+</h3>
+<h3 class="topic">
+    <a name="3rln7isn0v9073k5g6b5hrao6u">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表排序</a>
+</h3>
+<h3 class="topic">
+    <a name="1nigg59gjaipq75lbgvbuojmea">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;按照上传时间倒序,最新显示在最前</a>
+</h3>
+<h3 class="topic">
+    <a name="1805r0rndiar4cbcc9vrarabqo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据展示</a>
+</h3>
+<h3 class="topic">
+    <a name="7d5gh37t48fend744n6o011jpm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name</a>
+</h3>
+<h3 class="topic">
+    <a name="3iuca3hcjdgg56glv2igo8los2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件的名称:如果文件名称过长,则显示前20位,后10位,中间省略号展示</a>
+</h3>
+<h3 class="topic">
+    <a name="41mdb0qavr3mpjapak5pc98bld">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upload to</a>
+</h3>
+<h3 class="topic">
+    <a name="4v2ecgu71b1jqs55ob6aapcn3t">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件上传路径:如果过长,则换行展示</a>
+</h3>
+<h3 class="topic">
+    <a name="0lo17eethtfjia6203316aa7f1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status</a>
+</h3>
+<h3 class="topic">
+    <a name="2ceos32783m0hejumtii7t7kk9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件的状态</a>
+</h3>
+<h3 class="topic">
+    <a name="2uu5j0br4gpi2dnarfqj2cfkqr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果文件正在上传中,则状态为
+        :显示上传进度 0%~100%</a>
+</h3>
+<h3 class="topic">
+    <a name="78heb1lv4um9ueduh29q47cpjc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果文件停止上传,则状态为:stopped</a>
+</h3>
+<h3 class="topic">
+    <a name="15lf17o9goctbd2710k782fff8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果文件已上传成功,则状态为:uploaded</a>
+</h3>
+<h3 class="topic">
+    <a name="1o8se1bhctuofj9jht558ilrae">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果文件上传失败,则状态为:upload
+        failed</a>
+</h3>
+<h3 class="topic">
+    <a name="684hoahg034sviledevghdi4gk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;鼠标移至"upload
+        failed"栏后方的"!"小图标</a>
+</h3>
+<h3 class="topic">
+    <a name="6iiev5pho8uplka0hj8ifdfv9u">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可展示上传失败的原因</a>
+</h3>
+<h3 class="topic">
+    <a name="5pou7k1n6e2igs4c513u7ae2mv">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;actions</a>
+</h3>
+<h3 class="topic">
+    <a name="513img656ogfsfrp8omq4fqv1p">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当文件的状态是
+        "uploading"时</a>
+</h3>
+<h3 class="topic">
+    <a name="7urmcf57kbdf12e635hu8ne02f">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若文件上传成功</a>
+</h3>
+<h3 class="topic">
+    <a name="37cahgi147h4djbh1qn84pkaot">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;则uploaded列表数据与table顶部的统计项会新增相应的数据</a>
+</h3>
+<h3 class="topic">
+    <a name="5gi0am7c9v9c7hmiqsjj43ceo7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploading
+        列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="1m4bb7lclo6be3jrjo2m1q5umb">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若文件上传失败</a>
+</h3>
+<h3 class="topic">
+    <a name="3s6po75g2gl8rha7p31tq5obtf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;则upload
+        failed列表数据与table顶部的统计项会新增相应的数据</a>
+</h3>
+<h3 class="topic">
+    <a name="7m1eriuvfc72mkn5lfq8t0o99p">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploading
+        列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="15ualnfvg0b0mc2pbqsjuvio41">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作栏显示"cancel"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="73p04f92a28461suhegbam8kh0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"cancel"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="7vk0heb7vr4737ofrvn9m5mho1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有取消上传的文件都会对应的转移到已停止中去</a>
+</h3>
+<h3 class="topic">
+    <a name="0cabun0f2gfoo5mncbrvgvkgt8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;顶部菜单统计项,stopped
+        统计数量相应增加</a>
+</h3>
+<h3 class="topic">
+    <a name="3m36h78n7hdppdjf8qfnnjfl40">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploading
+        列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="6lipc37g84113hul2p4179dji1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面还是展示uploading
+        列表,不切换至stopped列表</a>
+</h3>
+<h3 class="topic">
+    <a name="45n618jsq4s2c1slmju9c7506g">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table顶部显示"stop
+        uploading"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="3mef8on24tjdbnnnce6noc08la">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击顶部"stop
+        uploading"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="208m8v19e7pi6se8ra0qfmi01f">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有未上传成功的文件都会对应的转移到已停止中去</a>
+</h3>
+<h3 class="topic">
+    <a name="3pusldbh5amn8f7jd4v3vpt98l">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"stop
+        uploading"按钮不可点击,置灰</a>
+</h3>
+<h3 class="topic">
+    <a name="2a2nj8dds5kr6g5uvd1hedi0ag">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;顶部菜单统计项,stopped
+        统计数量相应增加</a>
+</h3>
+<h3 class="topic">
+    <a name="20vivu1r1373j002loiiblfn1e">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table列表
+        展示所有的 状态为 stopped 的文件</a>
+</h3>
+<h3 class="topic">
+    <a name="2vik1plsd2jnmj4ipeqd6kl58r">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反复切换
+        "stop uploading"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="3s1dtueekc1ph8s41ofcsgqb63">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据响应正常,交互正常,无崩溃报错信息</a>
+</h3>
+<h3 class="topic">
+    <a name="6c2bb088i728j6rkdnu3b149cq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当文件的状态是
+        "stopped"时</a>
+</h3>
+<h3 class="topic">
+    <a name="5nilq64bp7g917slfcr946cs5d">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作栏显示"Retry","clear
+        records"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="7ir9n2d6cqkudvs6m5n5uee6qr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Retry"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="6cf2opm39t6232ar2qru6qbamc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件会回到上传中(uploading)继续上传</a>
+</h3>
+<h3 class="topic">
+    <a name="67l6ad1bmi16ae7luc5hkvn746">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploading
+        列表数据与table顶部的统计项增加相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="39qqtpomrfqj8so0enumq54isr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stopped
+        列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="2kd21jadqen69kvvcncfmb1rtk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"clear
+        records"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="4k7885sp8tb4o2ta6buj6n5m29">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果删除的是个文件</a>
+</h3>
+<h3 class="topic">
+    <a name="1o7dqqq4u2djt2je09cfrdj04o">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除该条文件记录,物理删除,该文件除非重新上传,才可看到</a>
+</h3>
+<h3 class="topic">
+    <a name="132acrvemors4vorvr935l1sgl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stopped
+        列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="13s77eb8rlrg9oobo3k2eoh6s1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all
+        列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="22e6pdvb79me95okug7c4ddu7k">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table顶部显示"clear
+        all records","start all"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="2sc44qqisf12tka5od6ee6ueu5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击顶部"clear
+        all records"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="7h55odnkv3b1fmcs7rvivn5ksf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;因停止上传,文件未上传成功,清除列表全部文件记录,该文件除非重新上传,才可看到</a>
+</h3>
+<h3 class="topic">
+    <a name="1s1aphftjg9if5g4lhfv8t56gq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stopped
+        列表数据清空,table顶部的统计值为0</a>
+</h3>
+<h3 class="topic">
+    <a name="4468ge12ia4tvqc4vib28pd7fr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all
+        列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="5hnsgip414q7l7ppdc0uvgengl">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击顶部"start
+        all"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="11bh1rmsa555tpr4ghtk0riech">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stopped列表中所有的文件开始重新上传,数据进入到uploading列表</a>
+</h3>
+<h3 class="topic">
+    <a name="5sj6o9n2eo62j9kub97k58cvns">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploading
+        列表数据与table顶部的统计项增加相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="25b5rc7qb457dk1tjj77sf2364">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stopped
+        列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="7jqah52m3cbl2l5bivdjuoelr0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当文件的状态是
+        "uploaded"时</a>
+</h3>
+<h3 class="topic">
+    <a name="202g2gl6rm4lfnetdv4t0i4peu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作栏显示"share","clear
+        records"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="7v0o3cjtgc3gg7bv2k743jmtns">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"share"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="5kakh45sj9ivnpvfrqfk7aoioo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成功拷贝文件所在的地址链接</a>
+</h3>
+<h3 class="topic">
+    <a name="0vo4mionv1kss8pq4ppsso03t4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出提示框:copy
+        successfully!</a>
+</h3>
+<h3 class="topic">
+    <a name="0qnfuqv7248phgi5tg6tornhkj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"clear
+        records"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="54bah3i5e79lnl0hdkhf53of9i">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单条数据清除:清除该条上传记录,进入到文件目录下,还可看到该文件,此处的清除记录,是指从任务列表清除,而不是从根本上删除记录</a>
+</h3>
+<h3 class="topic">
+    <a name="1svkoru397i6eniev9vji1tir7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploaded
+        列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="3j56esn78u2eh30hgvqu9jkpdp">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all
+        列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="5sgp2pbur0coqae96el71auo09">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table顶部显示"clear
+        all records"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="46vplqhvt7n5kcso8buia9gqrn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击顶部"clear
+        all records"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="4cb8rh5oslb30s337gff5kleog">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;批量数据清除:清除该列表的全部上传记录,进入到文件目录下,还可看到该文件,此处的清除记录,是指从任务列表清除,而不是从根本上删除记录</a>
+</h3>
+<h3 class="topic">
+    <a name="3buhav6ijfm8ao4128ldmsn4j6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploaded
+        列表数据清空,table顶部的统计值为0</a>
+</h3>
+<h3 class="topic">
+    <a name="3k9993d0vhgcuueikegmi5gike">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all
+        列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="63hndis3m9q5ida4m157j2qast">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当文件的状态是
+        "upload failed"时</a>
+</h3>
+<h3 class="topic">
+    <a name="4gfn0d2njc6l6asvakshauc072">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作栏显示"retry","clear
+        records"</a>
+</h3>
+<h3 class="topic">
+    <a name="644dm45o2uqr40ef1qrpji2t0g">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Retry"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="6f8qcreep0goi9t1bdlj4kqm2d">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件会回到上传中(uploading)继续上传</a>
+</h3>
+<h3 class="topic">
+    <a name="5okjl5tmab2mcom71iqe0bsk5p">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploading
+        列表数据与table顶部的统计项增加相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="3l9dhmn9lcbjfb9jr3j18mtjq6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upload
+        failed 列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="3skadus5q9rls8cc0nqhhhbckb">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"clear
+        records"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="4pv526arlbgp1u2rt3akh7bq7b">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单条数据清除:清除该条上传记录,因文件上传失败,进入到文件目录下,看不到该文件,此处的清除记录,是指从任务列表清除,而不是从根本上删除记录</a>
+</h3>
+<h3 class="topic">
+    <a name="02m5bfcevac8p575hol1ivtm1b">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upload
+        failed 列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="589pepc99lrjkoh2t4mj93bpuc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all
+        列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="6f2gamvqn98vjg388sq60nlkee">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table顶部显示"clear
+        all records","start all"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="70tnvcn8rljt3g95083ffh5klj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击顶部"clear
+        all records"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="3uo4rigj461vkt6eh7gnaa7i9t">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;批量数据清除:清除该列表的全部上传记录,因文件上传失败,进入到文件目录下,看不到该文件,此处的清除记录,是指从任务列表清除,而不是从根本上删除记录</a>
+</h3>
+<h3 class="topic">
+    <a name="6mgr3ur12ghaji0k9kakk7ctvm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upload
+        failed 列表数据清空,table顶部的统计值为0</a>
+</h3>
+<h3 class="topic">
+    <a name="1rl0fb947d272bu5tq28h2s9k6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all
+        列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="7hhf6tf98l7hf9repg9hotiuap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击顶部"start
+        all"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="28arlriplqo03v1dpoed87etjq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upload
+        failed 列表中所有的文件开始重新上传,数据进入到uploading列表</a>
+</h3>
+<h3 class="topic">
+    <a name="7c71fbvaq5v5jav9us6fi5t948">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uploading
+        列表数据与table顶部的统计项增加相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="3rse4ch0s09ofkaekqj3k2fama">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;upload
+        failed 列表数据与table顶部的统计项减少相应数据</a>
+</h3>
+<h3 class="topic">
+    <a name="2ot42qcv36tuco0ftpfi5vi2df">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delete folder</a>
+</h3>
+<h3 class="topic">
+    <a name="5u619n08b91cfcvvjitec66ah4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UI布局</a>
+</h3>
+<h3 class="topic">
+    <a name="0nnve5ngv7do1aojer6fbibce7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击右上角的"close"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="4eerrviv6v12tle6d0gapoje3s">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭当前task list界面</a>
+</h3>
+<h3 class="topic">
+    <a name="73j18ves0nplrs8lubg8e35jml">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;整个界面UI布局完整,线条完整,无错别字</a>
+</h3>
+<h3 class="topic">
+    <a name="3t4dk8klidqrbtb4vur2n8ad35">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反复切换顶部各个菜单页切</a>
+</h3>
+<h3 class="topic">
+    <a name="65b3mnadh6s1vsn22um091fjih">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面交互正常,数据展示正常</a>
+</h3>
+<h3 class="topic">
+    <a name="5h1bve8sv7d3bfl06o52iavb03">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tip</a>
+</h3>
+<h3 class="topic">
+    <a name="4ufb46s31s8unboquib9be1ctu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tip提示:If you refresh or close
+        the page when the folder is being deleted,the displayed number of deleted files may be inaccurate.</a>
+</h3>
+<h3 class="topic">
+    <a name="32s8g4c7kag2pafnnh3v9jom8u">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table列表</a>
+</h3>
+<h3 class="topic">
+    <a name="51vam5pbcsu0jg4tllkbjq92k9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delete folder列表</a>
+</h3>
+<h3 class="topic">
+    <a name="2v288g58t53d5n8i2va8ek0pbj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若有数据,则默认展示一页10条信息</a>
+</h3>
+<h3 class="topic">
+    <a name="6nhcf0m66shunfsob6kmkgvrga">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若无数据,则显示No data
+        available</a>
+</h3>
+<h3 class="topic">
+    <a name="4aqamapkpqpi42kukglm43l9rj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table顶部的"remove","pause
+        all","srart all"按钮置灰不可点击</a>
+</h3>
+<h3 class="topic">
+    <a name="4q3r1hs413uqdo8m9kuninfqu0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件夹删除成功后,列表里面的数据与分页数据都正确展示</a>
+</h3>
+<h3 class="topic">
+    <a name="2nj55910v7vsakj8ho62v3naqo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暴力点击每一个按钮,数据加载都正常</a>
+</h3>
+<h3 class="topic">
+    <a name="0qmviod743fq0lts39mj3ojfct">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表排序</a>
+</h3>
+<h3 class="topic">
+    <a name="2hr8126303hkn8717uaq795c3o">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据删除时间倒序</a>
+</h3>
+<h3 class="topic">
+    <a name="6ric6u722t02qchrmcivfns94m">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据展示</a>
+</h3>
+<h3 class="topic">
+    <a name="4m2g1vnjea2qi3ur0u05kgqvdd">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;folder name</a>
+</h3>
+<h3 class="topic">
+    <a name="1lkjhopouiv7kf5qqsbigucn3g">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件夹的名称</a>
+</h3>
+<h3 class="topic">
+    <a name="2m6727n9cu3aahfrr71fisk9st">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果名称过长,则头尾显示10位,中间省略号显示</a>
+</h3>
+<h3 class="topic">
+    <a name="6j9rg06vqcsgmo5e2q5fivtthi">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bucket</a>
+</h3>
+<h3 class="topic">
+    <a name="2n68v1euadn1u5kvq1gcv9kfdm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该文件夹所属的bucket名称</a>
+</h3>
+<h3 class="topic">
+    <a name="1kh1tuqt8esnn0v6f2vpjpo43p">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number of deleted
+        files</a>
+</h3>
+<h3 class="topic">
+    <a name="3k61pofd3hgsoonjkr3r8eno5q">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已删除的文件夹下面的文件数</a>
+</h3>
+<h3 class="topic">
+    <a name="1d77crj7ms9draek53b14a7cqv">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;执行删除任务的时候，已删除文件数实时增加，直到全部删除完成，状态变为删除完成</a>
+</h3>
+<h3 class="topic">
+    <a name="0plbltbgmt1che1vvuj2f53hu8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;status</a>
+</h3>
+<h3 class="topic">
+    <a name="35uklk46lfi554jurrge5gumtm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果文件删除完成,则显示:COMPLETE</a>
+</h3>
+<h3 class="topic">
+    <a name="6947v5v50ojees7agrm77oudn6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果文件正在删除中,则显示:DELETING</a>
+</h3>
+<h3 class="topic">
+    <a name="6o05467jbmp4a6pe0a52coro4q">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果文件暂停删除,则显示为:PAUSED</a>
+</h3>
+<h3 class="topic">
+    <a name="4p1ju4e7vaoh05bbc9okljqopu">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;actions</a>
+</h3>
+<h3 class="topic">
+    <a name="2llcgapnfhmh2ne9bm6euq4l5f">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当删除状态是"COMPLETE"时</a>
+</h3>
+<h3 class="topic">
+    <a name="5i22fepn7ni2medjkufahf7kj1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作栏显示"remove"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="00tkkradkgtu1kda7rtqkmb0t6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"remove"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="6iid4h2ijh4e47sck7cr2h190h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据成功从该列表移除</a>
+</h3>
+<h3 class="topic">
+    <a name="6gcrc9k1j8s44qp28clrocc9vq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分页数据显示正确</a>
+</h3>
+<h3 class="topic">
+    <a name="6cj44lmq6cj9m5h689fh5gdnam">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该文件夹对应的bucket下面已经没有已删除的文件夹</a>
+</h3>
+<h3 class="topic">
+    <a name="0ikism4g9qdhvenno3l24mi3ps">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当删除状态是"DELETING"时</a>
+</h3>
+<h3 class="topic">
+    <a name="03udaaeesi731m2td1pu73k9f9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作栏显示"remove"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="74m7fce7k7ghvjqidvd590nccp">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"remove"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="7jnbtokjhr4v7briuobk5nj29i">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据成功从该列表移除</a>
+</h3>
+<h3 class="topic">
+    <a name="5r0m9gh5ti5054utl4pa5nrtun">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分页数据显示正确</a>
+</h3>
+<h3 class="topic">
+    <a name="594rbfgb8sds647poblnjf4bcg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该文件夹对应的bucket下面已经被删除的文件夹下面的文件数据被成功删除,未删除完成的数据还存在文件夹下</a>
+</h3>
+<h3 class="topic">
+    <a name="6umect9r9od0js316tetbiqgq3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"DELETING"时,"remove"按钮显示loading
+        加载中,直至删除完成</a>
+</h3>
+<h3 class="topic">
+    <a name="25kc7ajqb1tjkvpmg0g1hsu3ua">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当删除状态是"PAUSED"时</a>
+</h3>
+<h3 class="topic">
+    <a name="78ull6g8vjdj5aeaemusvjpp6d">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;操作栏显示"start","remove"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="3v8ggln5oub0qahl7sa5n4oe0u">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"start"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="2a04m3evjbn2bgnb23fun2h3ut">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文件夹删除任务继续进行</a>
+</h3>
+<h3 class="topic">
+    <a name="10gfl7bkb5mof3gfq100a6u0t6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除的状态从"PAUSED"变成
+        "DELETING"</a>
+</h3>
+<h3 class="topic">
+    <a name="665ldk42q20th6hbq121qgd3gm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number
+        Of Deleted Files 数值随着已删除的文件数量累加,直至删除完成,状态变成"COMPLETE"</a>
+</h3>
+<h3 class="topic">
+    <a name="7lddl666d1hi2j1jid4d4kfc69">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"remove"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="0vbj4fdno4v9vthgvb7cfr040m">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据成功从该列表移除</a>
+</h3>
+<h3 class="topic">
+    <a name="621f15hem1evn4g11ch5016es8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分页数据显示正确</a>
+</h3>
+<h3 class="topic">
+    <a name="7kued4jujbtj450v6t6jad17m7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该文件夹对应的bucket下面删除失败的文件夹下面的文件数据被成功删除,删除失败的数据还存在文件夹下</a>
+</h3>
+<h3 class="topic">
+    <a name="7dqbilohs0um1ofqft9dc32n67">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若一直不点击"remove"按钮,数据是否一直存在.</a>
+</h3>
+<p class="labelsAndMarkers">
+    <img class="marker" src="Bucket3.2_files/images/symbol_question.png">, <span class="label">待定</span>
+</p>
+<h3 class="topic">
+    <a name="4acer6nm8043ijlf0m2no7voba">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table顶部的"remove","pause
+        all","srart all"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="2dfugqu917ca2drpv3l4qf892n">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若delete
+        folder列表里面没有数据</a>
+</h3>
+<h3 class="topic">
+    <a name="3vu841vkb3hrgq6eqm0h6vqdk5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"removed","pause
+        all","srart all"置灰不可操作</a>
+</h3>
+<h3 class="topic">
+    <a name="1vuqfao4j5qtoh9n3pde393k0d">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若delete
+        folder列表都是删除完成的数据</a>
+</h3>
+<h3 class="topic">
+    <a name="099o7jik4aerdnakgkukbm1rco">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"pause
+        all","srart all"置灰不可操作</a>
+</h3>
+<h3 class="topic">
+    <a name="2bh2ruqaqrig085k9s6n4ciiit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"removed"按钮高亮可操作</a>
+</h3>
+<h3 class="topic">
+    <a name="1n6h58hfvai96ll4f7sfcjuipe">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"removed"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="6r407rsadbggpbkthmpgiiqtgj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据成功从该列表移除,列表数据为空,分页为0</a>
+</h3>
+<h3 class="topic">
+    <a name="3ev7vsqibl7o1mqueggu2crakt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该文件夹对应的bucket下面已经没有已删除的文件夹</a>
+</h3>
+<h3 class="topic">
+    <a name="7bq8grri683ftg6vl4spopf7ne">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若delete
+        folder列表都是删除任务暂停的数据</a>
+</h3>
+<h3 class="topic">
+    <a name="73fporan48f0ms15kj73m1n9k5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"removed","pause
+        all"按钮置灰不可操作</a>
+</h3>
+<h3 class="topic">
+    <a name="4fmv0ssilmaehdfnu9umgo0ker">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"srart
+        all"按钮高亮可操作</a>
+</h3>
+<h3 class="topic">
+    <a name="14f53reb7lo9htgqictd5fgks2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"start
+        all"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="3b3i161t6g2pumbrdl7p8trfr9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表中所有暂停删除的文件夹,删除任务继续进行</a>
+</h3>
+<h3 class="topic">
+    <a name="4g0rpfic0k1j62o9s3cms545r1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表中所有暂停删除的文件夹,删除的状态从"PAUSED"变成
+        "DELETING"</a>
+</h3>
+<h3 class="topic">
+    <a name="1p0bl2d3tdcprh0cvbrguouitc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表中所有暂停删除的文件夹,Number
+        Of Deleted Files 数值随着已删除的文件数量累加,直至删除完成,状态变成"COMPLETE"</a>
+</h3>
+<h3 class="topic">
+    <a name="6qinqdp8v92ocqidqfoqs3dgpq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若delete
+        folder列表都是删除中的数据</a>
+</h3>
+<h3 class="topic">
+    <a name="27tc3qdq04q9ieuaggvn46a8k3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"removed","start
+        all"按钮置灰不可操作</a>
+</h3>
+<h3 class="topic">
+    <a name="4a3hce412q2f5j37ag5in565ck">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"pause
+        all"按钮高亮可操作</a>
+</h3>
+<h3 class="topic">
+    <a name="7mv50f4k5g1d64nfojf5sas21j">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"pause
+        all"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="3sjmuhd5jeb0h1e64ahpghbif2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表中所有正在删除中(DELETING)的文件夹,删除任务暂停</a>
+</h3>
+<h3 class="topic">
+    <a name="1sbtqhe75mmjl277bf09rlbd87">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;列表中所有暂停删除的文件夹,删除的状态从"DELETING"变成
+        "paused"</a>
+</h3>
+<h3 class="topic">
+    <a name="1337a7q9j6ldvamlji68a9codc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分页</a>
+</h3>
+<h3 class="topic">
+    <a name="1m6fmcabrcv23pdergs0ame9ht">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一页最多显示10条数据</a>
+</h3>
+<h3 class="topic">
+    <a name="2807s78ik6e5tcgldr5d03mrmn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若数据小于10条，则只展示一页,跳转分页框默认填充1</a>
+</h3>
+<h3 class="topic">
+    <a name="6rlahem438qojpo04gdgd3i9st">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若数据大于10条，则显示分页信息</a>
+</h3>
+<h3 class="topic">
+    <a name="2s5ckcfqkefcl9d7iiuc970g70">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据数据量总数，一页10条，自动计算页数</a>
+</h3>
+<h3 class="topic">
+    <a name="3n3veg3lp60rhtn665nnil8ah5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若当前在第一页，则向前翻动的按钮"&lt;"置灰，不可点击</a>
+</h3>
+<h3 class="topic">
+    <a name="57ifateqvnf9su6o869d1i1e6o">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若当前在最后一页，则向后翻动的按钮"&gt;"置灰，不可点击</a>
+</h3>
+<h3 class="topic">
+    <a name="0bl08ik6kts08mpru2gqpf6pc6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若页数过多，则省略号显示，根据翻页的页数，自动将省略号变为页数，省略号顺延。</a>
+</h3>
+<h3 class="topic">
+    <a name="403mo5jdkiunor2nvok6puhoed">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加快翻页的频率，table数据正确展示，无崩溃及超时情况</a>
+</h3>
+<h3 class="topic">
+    <a name="7b3sa28deffq7dmfeqosh6tt73">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;跳转分页</a>
+</h3>
+<h3 class="topic">
+    <a name="6ms7m1je7rnf9re6c5kfh9fhn5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在跳转分页输入框</a>
+</h3>
+<h3 class="topic">
+    <a name="1urnhe5i45r8sqkpgm8qsk8ir4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只能输入大于0,小于总页数的整数</a>
+</h3>
+<h3 class="topic">
+    <a name="5apmbrfogh26ae3lfe0trjsuha">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入0</a>
+</h3>
+<h3 class="topic">
+    <a name="3vmvhs0d8ik45sp7s3p9fbgmkq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;跳转分页输入框自动填充1</a>
+</h3>
+<h3 class="topic">
+    <a name="4ii055vac5ihjsos3mhmusvj7k">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入大于总页数的数字</a>
+</h3>
+<h3 class="topic">
+    <a name="7vbl5p68p3tbl2lrfii3ev5lps">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;跳转分页输入框自动填充最大的页数值</a>
+</h3>
+<h3 class="topic">
+    <a name="1orfhck1rl8a2km06cdcgl4fgj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入英文字母,汉字,空格.小数等异常字符</a>
+</h3>
+<h3 class="topic">
+    <a name="30vqk5jvl88hh22qu25hkbuspg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;程序自动处理,屏蔽掉所有异常,前后端无报错,无崩溃信息</a>
+</h3>
+<h3 class="topic">
+    <a name="6ptk8tru0n3aleah814uqpu67s">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;跳转分页输入框自动填充1</a>
+</h3>
+<h3 class="topic">
+    <a name="0r7f82mt6apdeg4qbkm49d7vvv">&nbsp;&nbsp;Parts</a>
+</h3>
+<h3 class="topic">
+    <a name="67erfhnvjs7k2l9sb7caobdk4j">&nbsp;&nbsp;&nbsp;点击"Parts"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="7re6dlbuf86m392kov3h9qbh3r">&nbsp;&nbsp;&nbsp;&nbsp;右侧弹出碎片列表界面</a>
+</h3>
+<h3 class="topic">
+    <a name="78o3sjv7iljge0fco56vm9i4aj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UI布局</a>
+</h3>
+<h3 class="topic">
+    <a name="50a904ah5l1ts8ero0qa3th2av">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;标题:Parts</a>
+</h3>
+<h3 class="topic">
+    <a name="1k6bmsjoeifdla27k8jhjs24n2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;整个界面UI布局完整,线条完整,无错别字</a>
+</h3>
+<h3 class="topic">
+    <a name="7uogo0tk2jik510p5rgtnj44sd">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table列表</a>
+</h3>
+<h3 class="topic">
+    <a name="1q3aekdl4hdlm7enf2kr11k74h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;排序规则:按照S3标准</a>
+</h3>
+<h3 class="topic">
+    <a name="6r3v1cen4hrcakt58g1in2854v">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;该列表展示的是取消上传的文件以及当bucket存储不足时,上传失败的文件碎片,当没有数据时,界面显示无数据界面,No
+        folders or files</a>
+</h3>
+<h3 class="topic">
+    <a name="4sq2bo624ogue1dcfumn2pimbg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据展示</a>
+</h3>
+<h3 class="topic">
+    <a name="2klsafoqp77emd8jgk816ebmqm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name,Upload ID</a>
+</h3>
+<h3 class="topic">
+    <a name="4e4dg7a4j0ttarph9d73clgo1b">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;顶部展示"Delete" 和 "Delete All"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="2ohfqr1h8g623infhgvorhef5d">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Delete"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="2r2o3fm37m17rdll1t9e64i1pn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;没有文件选中的时删除按钮置灰</a>
+</h3>
+<h3 class="topic">
+    <a name="1bnqq53t7d3pu51fbsq2v04r0t">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当选中文件时</a>
+</h3>
+<h3 class="topic">
+    <a name="70tukfm4h4sehph5r3bc8natai">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择一条</a>
+</h3>
+<h3 class="topic">
+    <a name="75n8kudi3pm8kj8r9h3oa5tqgm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete按钮高亮显示</a>
+</h3>
+<h3 class="topic">
+    <a name="0fj6u97htejk3l22avrausp1um">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Delete"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="7h4dg91l0doep3n828sv9qb7r1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;碎片被成功删除</a>
+</h3>
+<h3 class="topic">
+    <a name="3e9cm2jjd1vrhh5uk59i68ls6g">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;碎片从碎片列表消失</a>
+</h3>
+<h3 class="topic">
+    <a name="4fs6j3vrhmv93rs54e7hr0bgt5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分页数据正确</a>
+</h3>
+<h3 class="topic">
+    <a name="4lhuq4ck5ccnq1uscu6ici3cji">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;选择多条</a>
+</h3>
+<h3 class="topic">
+    <a name="2ih3tu9cqpkhqoivtdc7esugpn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete按钮高亮显示</a>
+</h3>
+<h3 class="topic">
+    <a name="5khc710v4doikmvntirakrtlvb">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Delete"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="521s63k037cajlqpg7tr6ofedq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;碎片被成功批量删除</a>
+</h3>
+<h3 class="topic">
+    <a name="0akb3fi0khctgim8iagmglh3b8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;碎片从碎片列表消失</a>
+</h3>
+<h3 class="topic">
+    <a name="1qr145iul0lkbmviima1n7g71o">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分页数据正确</a>
+</h3>
+<h3 class="topic">
+    <a name="3fbvc3160rk5s36lddfs5l3uc5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一次最多选择10条数据</a>
+</h3>
+<h3 class="topic">
+    <a name="5b0b0vk1rdbtmuf8jhq35tri5l">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Delete All"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="6bn5kseti7l8o9it956eba8u9v">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;没有文件选中时"Delete All"按钮置灰</a>
+</h3>
+<h3 class="topic">
+    <a name="6o2n1ickptluem49teh5apr3k4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当选中文件时</a>
+</h3>
+<h3 class="topic">
+    <a name="4sjovkrmcg9an27l2qli9qm9g7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Delete All"按钮高亮显示</a>
+</h3>
+<h3 class="topic">
+    <a name="3oultp8j40b12n3qlmrtg8tjvr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Delete
+        All"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="3lq72v70si320sqlq045smlfbm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有碎片被成功删除</a>
+</h3>
+<h3 class="topic">
+    <a name="4o507bh9t7ra7hhh6njqil5rk2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;碎片从碎片列表消失</a>
+</h3>
+<h3 class="topic">
+    <a name="3p3b2bseeick34b41kdtgn4ku8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分页数据正确</a>
+</h3>
+<h3 class="topic">
+    <a name="0me3drgm9s0no5130da2vrt3rb">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分页</a>
+</h3>
+<h3 class="topic">
+    <a name="74ogd8oh4t4um6t6222i552tgg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;一页最多显示10条数据</a>
+</h3>
+<h3 class="topic">
+    <a name="17lnt2a7g389gob9b292nd4s2e">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若数据小于10条，则只展示一页,跳转分页框默认填充1</a>
+</h3>
+<h3 class="topic">
+    <a name="42dkgetsfkdq8dri5cr7b97605">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若数据大于10条，则显示分页信息</a>
+</h3>
+<h3 class="topic">
+    <a name="6h2sa49t9g9uihglr2k9bk5kqi">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据数据量总数，一页10条，自动计算页数</a>
+</h3>
+<h3 class="topic">
+    <a name="1m45tuq4cb84t5uehb85657rnq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若当前在第一页，则向前翻动的按钮"&lt;"置灰，不可点击</a>
+</h3>
+<h3 class="topic">
+    <a name="3iokejr8dfbfrdtttcjs0otgg6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若当前在最后一页，则向后翻动的按钮"&gt;"置灰，不可点击</a>
+</h3>
+<h3 class="topic">
+    <a name="3lpe7cgueesko72648p6a5g6sn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若页数过多，则省略号显示，根据翻页的页数，自动将省略号变为页数，省略号顺延。</a>
+</h3>
+<h3 class="topic">
+    <a name="1nfup4uajimvopvq7msvcqlcpk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加快翻页的频率，table数据正确展示，无崩溃及超时情况</a>
+</h3>
+<h3 class="topic">
+    <a name="68ujdav0o7ug3cdgs399vcml5p">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;跳转分页</a>
+</h3>
+<h3 class="topic">
+    <a name="56t3u5gmmph49pgnnsn5njmgbh">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在跳转分页输入框</a>
+</h3>
+<h3 class="topic">
+    <a name="2eq7gkv344no3cbh1avdtn7m7h">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只能输入大于0,小于总页数的整数</a>
+</h3>
+<h3 class="topic">
+    <a name="0lupobig9883sfjv9jd8rlg1ni">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入0</a>
+</h3>
+<h3 class="topic">
+    <a name="1njtpb4t6ms86gj3g764h8hmvc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;跳转分页输入框自动填充1</a>
+</h3>
+<h3 class="topic">
+    <a name="1gmf6q3cg8kqu6gh2af84uhmcs">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入大于总页数的数字</a>
+</h3>
+<h3 class="topic">
+    <a name="2aaloq488t2p7du3mqh6mh2kph">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;跳转分页输入框自动填充最大的页数值</a>
+</h3>
+<h3 class="topic">
+    <a name="3nb4gkngovr90nrgtf5eh8hr14">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入英文字母,汉字,空格.小数等异常字符</a>
+</h3>
+<h3 class="topic">
+    <a name="30k5qkdv33fqcsm5dvvhstidsv">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;程序自动处理,屏蔽掉所有异常,前后端无报错,无崩溃信息</a>
+</h3>
+<h3 class="topic">
+    <a name="5tmr4nikdii3748au4loggf2rp">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;跳转分页输入框自动填充1</a>
+</h3>
+<h3 class="topic">
+    <a name="766rdhesge5ecg70vh8a5ek9pb">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击右上角close按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="5aself0uipaq1rs938uu56h1u0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成功关闭当前碎片界面</a>
+</h3>
+<h3 class="topic">
+    <a name="2vdkerat2kfr6f4ikf4c2a51rf">&nbsp;&nbsp;New Folder</a>
+</h3>
+<h3 class="topic">
+    <a name="1q98b2e867ohdlvv7vpp3852kk">&nbsp;&nbsp;&nbsp;点击"New Folder"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="705qc4vtuej5sbei0ce6pkv16d">&nbsp;&nbsp;&nbsp;&nbsp;弹出添加文件夹的弹窗</a>
+</h3>
+<h3 class="topic">
+    <a name="1svgdqircqrc19271huegi5k25">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Folder Name输入框</a>
+</h3>
+<h3 class="topic">
+    <a name="4j6o49st8k42vq7o1sua26d6g2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;输入限制为1~60小写英文字母以及数字构成</a>
+</h3>
+<h3 class="topic">
+    <a name="6lb500eii4tua30m74tt5si3ra">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文本框下方提示对应的信息</a>
+</h3>
+<h3 class="topic">
+    <a name="1kjti4sqr5rnlrush20g53r0a9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;文本框后方的数字提示随着已输入的字符数相应减去</a>
+</h3>
+<h3 class="topic">
+    <a name="7q0v81vpnrru2gq1antbcev4ou">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不可输入汉字,大写字母,表情符号及其它特殊字符</a>
+</h3>
+<h3 class="topic">
+    <a name="4no7lulmb856kk97f3fjt5r7in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不可输入空格等</a>
+</h3>
+<h3 class="topic">
+    <a name="7p6p6dide3h936ppi4o90e5gft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;同一个目录下,不可输入已存在的Folder Name</a>
+</h3>
+<h3 class="topic">
+    <a name="10cdugfhfo2cpi0jsq7enmgoma">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不同目录下,可输入数据库已存在的已存在的Folder Name</a>
+</h3>
+<h3 class="topic">
+    <a name="7h72khkrjrkro8bprkolfif57f">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cancel</a>
+</h3>
+<h3 class="topic">
+    <a name="296ie5be7ulr8nhan1rej82cf2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Cancel"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="2kd1cun309fsq0d9him5r7jida">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭当前弹框界面</a>
+</h3>
+<h3 class="topic">
+    <a name="10juoesfr00vdi1dqd6s1l7edq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已输入的Floder未成功添加</a>
+</h3>
+<h3 class="topic">
+    <a name="3cbpf2ljsa8008vj3usik4tini">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OK</a>
+</h3>
+<h3 class="topic">
+    <a name="66sljbqqvrjouibp9mn85prlka">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"OK"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="6kf7d3ge4poje38f80elvf31is">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Floder成功添加,当前列表正确展示刚添加的文件夹</a>
+</h3>
+<h3 class="topic">
+    <a name="7hi1170kljf4e48ns32ik5cr6o">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关闭当前弹窗</a>
+</h3>
+<h3 class="topic">
+    <a name="7rmje4i4502f4fu2o0a1i2jk5a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;暴力点击"OK"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="3a5r0sh2sc1tb70baofbk5rjnm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只提交一次请求,数据响应无异常</a>
+</h3>
+<h3 class="topic">
+    <a name="55phgccoa01hl6oifqlsl77r50">&nbsp;Statistics</a>
+</h3>
+<h3 class="topic">
+    <a name="4gbuj6ndmpmnjl09usfdvbh8co">&nbsp;&nbsp;UI布局</a>
+</h3>
+<h3 class="topic">
+    <a name="39mquliuu5sbdup74duq1siqs0">&nbsp;&nbsp;&nbsp;详情界面顶部菜单页切正常,快速切换后正常跳转至对应界面,数据响应正常,无报错信息</a>
+</h3>
+<h3 class="topic">
+    <a name="6k6t5p1sjna7vrtdjmep068l5o">&nbsp;&nbsp;&nbsp;整个界面UI布局完整,线条完整,无错别字</a>
+</h3>
+<h3 class="topic">
+    <a name="1jcvucesd9dbfm5bujd64vquq5">&nbsp;&nbsp;Buckets</a>
+</h3>
+<h3 class="topic">
+    <a name="1rtc50sp8rcgqkiqhkomjrf3ks">&nbsp;&nbsp;&nbsp;默认显示24H</a>
+</h3>
+<h3 class="topic">
+    <a name="64t78a9699bh7qipbcdcrpufor">&nbsp;&nbsp;&nbsp;该报表展示:存储空间包含统计IPFS和AR，光标移动到某个点时显示数据详细信息（对应ipfs以及AR消耗存储大小）</a>
+</h3>
+<h3 class="topic">
+    <a name="6vpgj51e5borcr8lpr45954g28">&nbsp;&nbsp;&nbsp;&nbsp;单位递增依次为B、KB、MB、GB ,1024进到下一个单位</a>
+</h3>
+<h3 class="topic">
+    <a name="1doknlu47b0v30nqu5frn7bqbf">&nbsp;&nbsp;&nbsp;x轴</a>
+</h3>
+<h3 class="topic">
+    <a name="3ejmtqj65gk9qnajjp2q1pqaho">&nbsp;&nbsp;&nbsp;&nbsp;展示时间</a>
+</h3>
+<h3 class="topic">
+    <a name="2omestkd5f5bqcn2rbrfooh7k6">&nbsp;&nbsp;&nbsp;Y轴</a>
+</h3>
+<h3 class="topic">
+    <a name="5956h5odmefiijfmnl1egdo2na">&nbsp;&nbsp;&nbsp;&nbsp;根据存储的IPFS和AR所用的容量大小,自适应</a>
+</h3>
+<h3 class="topic">
+    <a name="3vktrvqa0oqfipqnr5avkbeo33">&nbsp;&nbsp;&nbsp;搜索维度</a>
+</h3>
+<h3 class="topic">
+    <a name="7771amfi2hc8r5g5bi4apsrhab">&nbsp;&nbsp;&nbsp;&nbsp;24H</a>
+</h3>
+<h3 class="topic">
+    <a name="5j4igiqkrthdvijh7i5hgu70rj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当选择"24H"时</a>
+</h3>
+<h3 class="topic">
+    <a name="4fpcrde1mehc0mmiq02vltidmr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X轴的时间4小时一间隔</a>
+</h3>
+<h3 class="topic">
+    <a name="2mshjbhoef7798n9p9fp5aarr3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面的Buckets折线图表根据已选择的时间,数据正确展示</a>
+</h3>
+<h3 class="topic">
+    <a name="51l77erbm70pdbgqrtdgctd17h">&nbsp;&nbsp;&nbsp;&nbsp;Past 7d</a>
+</h3>
+<h3 class="topic">
+    <a name="51pjtnugcfcu0dd8i4g1spjbp8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当选择"Past 7d"时</a>
+</h3>
+<h3 class="topic">
+    <a name="1e87ee003i700beiomacq567jf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X轴的时间1天一间隔</a>
+</h3>
+<h3 class="topic">
+    <a name="0v6tb1p9edsd9opp59ssi3d535">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面的Buckets折线图表根据已选择的时间,数据正确展示</a>
+</h3>
+<h3 class="topic">
+    <a name="6sqhalsgjr9drpjea26rantftv">&nbsp;&nbsp;&nbsp;&nbsp;Past 30d</a>
+</h3>
+<h3 class="topic">
+    <a name="1ggthsv1a4u572fqvkghkj9pnh">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当选择"Past 30d"时</a>
+</h3>
+<h3 class="topic">
+    <a name="33van4cff9r94bunj0aeu968vo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X轴的时间5天一间隔</a>
+</h3>
+<h3 class="topic">
+    <a name="4722k4k73pebs983sd0b3ogrk2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面的Buckets折线图表根据已选择的时间,数据正确展示</a>
+</h3>
+<h3 class="topic">
+    <a name="0id4043fg5dgtk0sinfh4tkgt1">&nbsp;&nbsp;&nbsp;&nbsp;Custom time</a>
+</h3>
+<h3 class="topic">
+    <a name="5d9m2kjqfgolfb7nsib6huml0v">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当选择"Custom time"时</a>
+</h3>
+<h3 class="topic">
+    <a name="2a33lua5irh706gevjvk1jihkv">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出日期控件可供时间段选择</a>
+</h3>
+<h3 class="topic">
+    <a name="3scqg70c3m8h8tgi1esj2v35in">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自定义时间搜索,最长搜索范围为1个月</a>
+</h3>
+<h3 class="topic">
+    <a name="02lp83v6u0i3jj6p6okoalavc4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X轴的时间5天一间隔</a>
+</h3>
+<h3 class="topic">
+    <a name="540ohrgtrciee4r4k7tbcb86f6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开始时间必须小于结束时间</a>
+</h3>
+<h3 class="topic">
+    <a name="227ktk89bngrpdc6o32v64474b">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面的Buckets折线图表根据已选择的时间,数据正确展示</a>
+</h3>
+<h3 class="topic">
+    <a name="19gj8e629l7mlcs9vl4rmgm66b">&nbsp;&nbsp;Traffic Usage</a>
+</h3>
+<h3 class="topic">
+    <a name="58ai7cj4alft13e2fnq8dccvr2">&nbsp;&nbsp;&nbsp;默认显示24H</a>
+</h3>
+<h3 class="topic">
+    <a name="72akkj2tl38700md180ns57rti">&nbsp;&nbsp;&nbsp;该报表展示:使用流量指该bucket下所有文件的流量消耗统计,光标移动到某个点时显示数据详细信息</a>
+</h3>
+<h3 class="topic">
+    <a name="76bhdhigg5eion038b24b26bvn">&nbsp;&nbsp;&nbsp;&nbsp;单位递增依次为B、KB、MB、GB ,1024进到下一个单位</a>
+</h3>
+<h3 class="topic">
+    <a name="7sr4b724c2i10ii2r29t9ch371">&nbsp;&nbsp;&nbsp;x轴</a>
+</h3>
+<h3 class="topic">
+    <a name="218vpg76qehubl1ljqr9t7ttiu">&nbsp;&nbsp;&nbsp;&nbsp;展示时间</a>
+</h3>
+<h3 class="topic">
+    <a name="3mdjcjes96k2u44pfsicqmnvdv">&nbsp;&nbsp;&nbsp;Y轴</a>
+</h3>
+<h3 class="topic">
+    <a name="0khg7sf1jl96ldig18skictf0s">&nbsp;&nbsp;&nbsp;&nbsp;根据使用的流量大小,自适应</a>
+</h3>
+<h3 class="topic">
+    <a name="53pkpans0li94u0q6eph27tokn">&nbsp;&nbsp;&nbsp;搜索维度</a>
+</h3>
+<h3 class="topic">
+    <a name="2bf6m9hs55sads72pmfqaljto1">&nbsp;&nbsp;&nbsp;&nbsp;24H</a>
+</h3>
+<h3 class="topic">
+    <a name="5br03bobtqiuqod19on408nj7u">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当选择"24H"时</a>
+</h3>
+<h3 class="topic">
+    <a name="79q1nfoijg1rhfgmf9v1qsln0d">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X轴的时间4小时一间隔</a>
+</h3>
+<h3 class="topic">
+    <a name="09hbm4b415h4uie7n1t99vnfnh">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面的Traffic Usage折线图表根据已选择的时间,数据正确展示</a>
+</h3>
+<h3 class="topic">
+    <a name="42mun4m2ims991d1bhb06sreec">&nbsp;&nbsp;&nbsp;&nbsp;Past 7d</a>
+</h3>
+<h3 class="topic">
+    <a name="0eapkq9ev7rsiqq0rcng4k4nl7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当选择"Past 7d"时</a>
+</h3>
+<h3 class="topic">
+    <a name="61ua0g2a36b5bv1fshar5k02f4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X轴的时间1天一间隔</a>
+</h3>
+<h3 class="topic">
+    <a name="2tpv8ck6nigt977ftm919972ld">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面的Traffic Usage折线图表根据已选择的时间,数据正确展示</a>
+</h3>
+<h3 class="topic">
+    <a name="73etfmr8f9vp50q2a5fj1fgcda">&nbsp;&nbsp;&nbsp;&nbsp;Past 30d</a>
+</h3>
+<h3 class="topic">
+    <a name="3djk1d2n4c70espbb30112qqft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当选择"Past 30d"时</a>
+</h3>
+<h3 class="topic">
+    <a name="1r98r6hu0vi902hregngjgo373">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X轴的时间5天一间隔</a>
+</h3>
+<h3 class="topic">
+    <a name="0aoe039tao8s6nlq5tl99307if">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面的Traffic Usage折线图表根据已选择的时间,数据正确展示</a>
+</h3>
+<h3 class="topic">
+    <a name="5cl48ojc0bmn5qt6fdsrard3vs">&nbsp;&nbsp;&nbsp;&nbsp;Custom time</a>
+</h3>
+<h3 class="topic">
+    <a name="6l6icc57b94v03e0a0ere0fe8s">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当选择"Custom time"时</a>
+</h3>
+<h3 class="topic">
+    <a name="1ii6i1vkqev2fk7fvd9b5cijrh">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出日期控件可供时间段选择</a>
+</h3>
+<h3 class="topic">
+    <a name="5vnuajrjb30p32v3277ih645bi">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自定义时间搜索,最长搜索范围为1个月</a>
+</h3>
+<h3 class="topic">
+    <a name="2pglbeorgnqr6jqh0g52kan8a8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X轴的时间5天一间隔</a>
+</h3>
+<h3 class="topic">
+    <a name="4i7t0l8hdl75p88ulv893rncmt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开始时间必须小于结束时间</a>
+</h3>
+<h3 class="topic">
+    <a name="64malic4gsdoj2fhr5poquj506">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面的Traffic
+        Usage折线图表根据已选择的时间,数据正确展示</a>
+</h3>
+<h3 class="topic">
+    <a name="384kcn12eodkhsih6bina71h4k">&nbsp;&nbsp;Requests</a>
+</h3>
+<h3 class="topic">
+    <a name="58bghe8ld82jbk1sfjsndla760">&nbsp;&nbsp;&nbsp;默认显示24H</a>
+</h3>
+<h3 class="topic">
+    <a name="1i9o438nt9p59ohpdsh8qmvv12">&nbsp;&nbsp;&nbsp;该报表展示:该bucket下所有文件的访问次数统计,光标移动到某个点时显示数据详细信息</a>
+</h3>
+<h3 class="topic">
+    <a name="2ejfflkjtp0qffj600uskro2ji">&nbsp;&nbsp;&nbsp;&nbsp;单位为次</a>
+</h3>
+<h3 class="topic">
+    <a name="1i56844km9evarp8uv3it6fkmc">&nbsp;&nbsp;&nbsp;x轴</a>
+</h3>
+<h3 class="topic">
+    <a name="4kdb2so7haqk8nnd5e497hth9b">&nbsp;&nbsp;&nbsp;&nbsp;展示时间</a>
+</h3>
+<h3 class="topic">
+    <a name="415qggecgk93u5fbf1jebpii91">&nbsp;&nbsp;&nbsp;Y轴</a>
+</h3>
+<h3 class="topic">
+    <a name="3d13620ongb1ahu72nuqj8dj0o">&nbsp;&nbsp;&nbsp;&nbsp;根据使用的流量大小,自适应</a>
+</h3>
+<h3 class="topic">
+    <a name="4akmdsv4h4bccrt0f6i9hiktom">&nbsp;&nbsp;&nbsp;搜索维度</a>
+</h3>
+<h3 class="topic">
+    <a name="2skes53gb888tf6727csj6h0fm">&nbsp;&nbsp;&nbsp;&nbsp;24H</a>
+</h3>
+<h3 class="topic">
+    <a name="4dncp6kif816d4gb4csqegsiri">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当选择"24H"时</a>
+</h3>
+<h3 class="topic">
+    <a name="7tb25u4p5jil23pmue9vnotggd">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X轴的时间4小时一间隔</a>
+</h3>
+<h3 class="topic">
+    <a name="0tt8lvbsi4ff7s4jjdssh84n9f">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面的Requests折线图表根据已选择的时间,数据正确展示</a>
+</h3>
+<h3 class="topic">
+    <a name="3tggv7ku10kosut169770q0iaq">&nbsp;&nbsp;&nbsp;&nbsp;Past 7d</a>
+</h3>
+<h3 class="topic">
+    <a name="52lkq30qucj7geruv9fms11go3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当选择"Past 7d"时</a>
+</h3>
+<h3 class="topic">
+    <a name="0tbmoq3btccbijcl09rq1irpp3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X轴的时间1天一间隔</a>
+</h3>
+<h3 class="topic">
+    <a name="6ohd4egmk1bcmfuoa1ke3isa9e">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面的Requests折线图表根据已选择的时间,数据正确展示</a>
+</h3>
+<h3 class="topic">
+    <a name="5isjblvf4d0m4v2oahgevku07g">&nbsp;&nbsp;&nbsp;&nbsp;Past 30d</a>
+</h3>
+<h3 class="topic">
+    <a name="2ed9gpt8tbhln1sha62edm1f9j">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当选择"Past 30d"时</a>
+</h3>
+<h3 class="topic">
+    <a name="184q51jmmef3r34i67a8idrrqr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X轴的时间5天一间隔</a>
+</h3>
+<h3 class="topic">
+    <a name="786hm8lstsip6ugi9og5hvb827">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面的Requests折线图表根据已选择的时间,数据正确展示</a>
+</h3>
+<h3 class="topic">
+    <a name="7qoe6amhnt06qc1506pc1ieb93">&nbsp;&nbsp;&nbsp;&nbsp;Custom time</a>
+</h3>
+<h3 class="topic">
+    <a name="2uqito0ea5s29us3sck4qkrqta">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当选择"Custom time"时</a>
+</h3>
+<h3 class="topic">
+    <a name="5sqqm2tg740qi9a2q0mr9kkmie">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;弹出日期控件可供时间段选择</a>
+</h3>
+<h3 class="topic">
+    <a name="5rehq0q9vnr8tj875c174b4v3i">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;自定义时间搜索,最长搜索范围为1个月</a>
+</h3>
+<h3 class="topic">
+    <a name="4i3c4je3qsvma61e8eden1572a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;X轴的时间5天一间隔</a>
+</h3>
+<h3 class="topic">
+    <a name="6u3ekktddspqgr74vs7msc68u6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开始时间必须小于结束时间</a>
+</h3>
+<h3 class="topic">
+    <a name="5mebhaguh1r36g9lnclb8mbnbi">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;界面的Requests折线图表根据已选择的时间,数据正确展示</a>
+</h3>
+<h2 class="topic">
+    <a name="7shsir77urt2hdhhdb8k2mjluq">New Bucket</a>
+</h2>
+<h3 class="topic">
+    <a name="7mlm6msju7g8hhetri4gg4jo36">&nbsp;进入Bucket界面,点击"New Bucket"按钮,进入新建bucket弹框界面</a>
+</h3>
+<h3 class="topic">
+    <a name="0shofcjoh978mg51opoea5u1t0">&nbsp;&nbsp;标题:New Bucket</a>
+</h3>
+<h3 class="topic">
+    <a name="1jltg78ntg7pi684m8fafmufj6">&nbsp;&nbsp;Bucket Name输入框</a>
+</h3>
+<h3 class="topic">
+    <a name="4qa11bagqiiv40emuvrqml0ham">&nbsp;&nbsp;&nbsp;输入限制为3~48小写英文字母以及数字构成</a>
+</h3>
+<h3 class="topic">
+    <a name="73qqq5100sufmmjk7mmrt5leu7">&nbsp;&nbsp;&nbsp;&nbsp;文本框下方提示对应的信息</a>
+</h3>
+<h3 class="topic">
+    <a name="54cnhrvi18hnmb0ru399tnli0b">&nbsp;&nbsp;&nbsp;&nbsp;文本框后方的数字提示随着已输入的字符数相应减去</a>
+</h3>
+<h3 class="topic">
+    <a name="4fo9cee2i5o8adlbg06fv0n2kf">&nbsp;&nbsp;&nbsp;不可输入汉字,大写字母,表情符号及其它特殊字符</a>
+</h3>
+<h3 class="topic">
+    <a name="60qkrq6f0fre5jgpp0867uh3a9">&nbsp;&nbsp;&nbsp;不可输入空格,横杠等</a>
+</h3>
+<h3 class="topic">
+    <a name="2mbc5iims9embhosvac4f46q0p">&nbsp;&nbsp;&nbsp;不可输入数据库已经存在的Bucket Name</a>
+</h3>
+<h3 class="topic">
+    <a name="24jbjelbr94kdd3skblhf3o5oi">&nbsp;&nbsp;ARweave</a>
+</h3>
+<h3 class="topic">
+    <a name="386jdcgktbiavsmr11afnl1ce5">&nbsp;&nbsp;&nbsp;默认关闭,灰色</a>
+</h3>
+<h3 class="topic">
+    <a name="6tcdes5t12q9q1ufe6iav0a2lh">&nbsp;&nbsp;&nbsp;点击开关按钮,打开之后变成蓝色</a>
+</h3>
+<h3 class="topic">
+    <a name="4d75um5m0r5jpj8277eam7dikq">&nbsp;&nbsp;&nbsp;&nbsp;下方显示出提示区域,文案:The start Arweave storage space is 100MB,
+        and files stored on Arweave network can't be deleted.</a>
+</h3>
+<h3 class="topic">
+    <a name="09m6k088i1862bk91selmqmce1">&nbsp;&nbsp;&nbsp;反复打开和关闭</a>
+</h3>
+<h3 class="topic">
+    <a name="4slk4hcl2nnpndmc5cqipdd2mm">&nbsp;&nbsp;&nbsp;&nbsp;切换正常,无异常.</a>
+</h3>
+<h3 class="topic">
+    <a name="4s6j43q54aqcfb2hl6j25e799s">&nbsp;&nbsp;Cancel</a>
+</h3>
+<h3 class="topic">
+    <a name="04f6b0sciiliavf0s68s2vb03t">&nbsp;&nbsp;&nbsp;点击"Cancel"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="1vhisp5q9ne6pg5mce1gdbo5r1">&nbsp;&nbsp;&nbsp;&nbsp;关闭当前弹框界面</a>
+</h3>
+<h3 class="topic">
+    <a name="26p2ls4p7l5j4f2kh9i35cedog">&nbsp;&nbsp;&nbsp;&nbsp;已输入的Bucket未成功添加</a>
+</h3>
+<h3 class="topic">
+    <a name="7c8qpj515tga2i6le8ra2371tg">&nbsp;&nbsp;OK</a>
+</h3>
+<h3 class="topic">
+    <a name="3ovabvto5anfquit8ccv5lfndg">&nbsp;&nbsp;&nbsp;点击"OK"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="3k7d50i34rhn87psguvoam3oqs">&nbsp;&nbsp;&nbsp;&nbsp;Bucket成功添加</a>
+</h3>
+<h3 class="topic">
+    <a name="64rs1v47nqbkpj3rla8jrf1r1d">&nbsp;&nbsp;&nbsp;&nbsp;关闭当前弹窗</a>
+</h3>
+<h3 class="topic">
+    <a name="7p5ptucri2svuuls6ejpv2qlvr">&nbsp;&nbsp;&nbsp;&nbsp;暴力点击"OK"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="778tg8n71ka1qt0m03j7fe5fko">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只提交一次请求,数据响应无异常</a>
+</h3>
+<h2 class="topic">
+    <a name="3kpf93dlgb60pjtcs9j98pmh3i">Actions</a>
+</h2>
+<h3 class="topic">
+    <a name="5is036amhitclg0ce4oosd27q9">&nbsp;Add Domain</a>
+</h3>
+<h3 class="topic">
+    <a name="1gsomr6ehqh3ibpa8jhm3puc5j">&nbsp;&nbsp;点击"Add Domain"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="4ccgk6inguqnlr1omd3lg98kbh">&nbsp;&nbsp;&nbsp;跳转至添加域名界面</a>
+</h3>
+<h3 class="topic">
+    <a name="2d2r629jofm70pq365cnu8i8fo">&nbsp;Delete</a>
+</h3>
+<h3 class="topic">
+    <a name="7f33h1kcijptsg5bfk3f9ai5tg">&nbsp;&nbsp;删除bucket</a>
+</h3>
+<h3 class="topic">
+    <a name="1ujen7f4fihd4oqpjn2novqcfa">&nbsp;&nbsp;&nbsp;单条删除bucket</a>
+</h3>
+<h3 class="topic">
+    <a name="77jga28oa7me5csl1cdqoj9cb0">&nbsp;&nbsp;&nbsp;&nbsp;选择某一条数据</a>
+</h3>
+<h3 class="topic">
+    <a name="2bidutlg50l65irrt90u57kmid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Delete"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="4m0vb61vc9e141t9s7gt1otom2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果该Bucket下面有文件</a>
+</h3>
+<h3 class="topic">
+    <a name="0gg9mpgnblrchp5df6t1777csb">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不能删除,必须进入该Bucket下,删除bucket里面全部的文件以后才可以删除Bucket</a>
+</h3>
+<h3 class="topic">
+    <a name="7s4rfqtclsv13s96limelfhce0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果该Bucket下面没有文件</a>
+</h3>
+<h3 class="topic">
+    <a name="055lisslgcdtanepv7pl6n9bhn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成功删除</a>
+</h3>
+<h3 class="topic">
+    <a name="6jkeptrhoo9ba4074i3hnf085j">&nbsp;&nbsp;&nbsp;&nbsp;如果被选bucket中存在AR文件</a>
+</h3>
+<h3 class="topic">
+    <a name="7cs2pkkid54ai1l3q50i2rc0p1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;则也不可删除</a>
+</h3>
+<h3 class="topic">
+    <a name="1due71drfl9ifnfrnc7h7dtm42">&nbsp;&nbsp;&nbsp;批量删除bucket</a>
+</h3>
+<h3 class="topic">
+    <a name="6prbbek5l86uo792b46fo471j7">&nbsp;&nbsp;&nbsp;&nbsp;选择多条数据</a>
+</h3>
+<h3 class="topic">
+    <a name="7klq1bodofo40kqpuqpdh3ou5d">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Delete"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="6i8frqdo8pvvnh4ois2o5ao465">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果已选择的Bucket下面有文件</a>
+</h3>
+<h3 class="topic">
+    <a name="7a4rdhlv0269m9le109ej677jj">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;不能删除,必须进入该Bucket下,删除bucket里面全部的文件以后才可以删除Bucket</a>
+</h3>
+<h3 class="topic">
+    <a name="11os4delvndobqpung9ltg8qsm">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果已选择的Bucket下面没有文件</a>
+</h3>
+<h3 class="topic">
+    <a name="6v21mqg73dn1btpkjlhhhdh84q">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;成功删除</a>
+</h3>
+<h3 class="topic">
+    <a name="41prfud9qek9cs81hacoi2uh6r">&nbsp;&nbsp;&nbsp;&nbsp;全选时如果被选bucket中存在AR文件</a>
+</h3>
+<h3 class="topic">
+    <a name="341iqacqtskig2jo2gdl55m06q">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;则也不可删除</a>
+</h3>
+<h3 class="topic">
+    <a name="25amkc23rcvfmp889cah5eo962">&nbsp;&nbsp;删除文件</a>
+</h3>
+<h3 class="topic">
+    <a name="6i695e4tavv1fvt2ihocnuee7e">&nbsp;&nbsp;&nbsp;单条删除文件</a>
+</h3>
+<h3 class="topic">
+    <a name="3ukes1fts73i4setc7phsmbtj0">&nbsp;&nbsp;&nbsp;&nbsp;选择某一条数据</a>
+</h3>
+<h3 class="topic">
+    <a name="4kj6rpnsup034urepqkd0rs9jp">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Delete"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="4fqu9lj2cknpk7ingfgqgprdb4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据成功删除,物理删除</a>
+</h3>
+<h3 class="topic">
+    <a name="58nlrlp8u15mh3p7pget9atkqr">&nbsp;&nbsp;&nbsp;&nbsp;如果该文件存储在AR</a>
+</h3>
+<h3 class="topic">
+    <a name="5frj3bod9i7kkrn08s9aaripuf">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;则也不可删除</a>
+</h3>
+<h3 class="topic">
+    <a name="0uc8fifhbq2vkmfpvhl1bm35vg">&nbsp;&nbsp;&nbsp;批量删除文件</a>
+</h3>
+<h3 class="topic">
+    <a name="3am7ujibdkvg7h3eo7e27tg7h8">&nbsp;&nbsp;&nbsp;&nbsp;选择多条数据</a>
+</h3>
+<h3 class="topic">
+    <a name="4snrntj7o4u7i9pno683l3rgdt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点击"Delete"按钮</a>
+</h3>
+<h3 class="topic">
+    <a name="10vo53bqhkrgiv7l97gil7p4bo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;数据成功删除,物理删除</a>
+</h3>
+<h3 class="topic">
+    <a name="6tvko8duulmp1jqjmglr5terfi">&nbsp;&nbsp;&nbsp;&nbsp;全选时如果被选bucket中存在AR文件</a>
+</h3>
+<h3 class="topic">
+    <a name="45vfdhp9dq4noku66sr5jo61l2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;则也不可删除</a>
+</h3>
+<h3 class="topic">
+    <a name="1d1jnav969lhb649t0nhdf0qeh">&nbsp;&nbsp;删除文件夹</a>
+</h3>
+<h3 class="topic">
+    <a name="0vl695dnrblpd0b7bddskqt5q9">&nbsp;&nbsp;&nbsp;单条数据删除文件夹</a>
+</h3>
+<h3 class="topic">
+    <a name="7fmnlo5r0qvn1583q6aofgeh88">&nbsp;&nbsp;&nbsp;批量删除文件夹</a>
+</h3>
+<h3 class="topic">
+    <a href="#2ot42qcv36tuco0ftpfi5vi2df" name="6cad039mej3176kvmhr6srk36q">&nbsp;&nbsp;&nbsp;被删除的文件夹,数据进入到Task List
+        &rarr; delete folder界面,删除进度在该界面进行</a>
+</h3>
+<p class="summary">(<a href="#0vl695dnrblpd0b7bddskqt5q9">单条数据删除文件夹</a>, <a
+        href="#7fmnlo5r0qvn1583q6aofgeh88">批量删除文件夹</a>)</p>
+<h2 class="topic">
+    <a name="5hajbmcd018vkt5j6cbga3fc5m">登录</a>
+</h2>
+<p class="relationships">参见: <a href="#3cplmlffoehq1ep0s0fthh45gr">Bucket list</a>
+</p>
+<h3 class="topic">
+    <a name="3bll1sjsvndfidcr4375au3hah">&nbsp;多个浏览器同时登录同一个账号,上传同样的文件</a>
+</h3>
+<h3 class="topic">
+    <a name="2ommjbtq5fkbfnakgfka2vllcg">&nbsp;&nbsp;覆盖</a>
+</h3>
+<h3 class="topic">
+    <a name="1qic1tpr0aera4l2luhpji3spf">&nbsp;多个浏览器同时登录同一账号,上传不同文件</a>
+</h3>
+<h3 class="topic">
+    <a name="5vukj7vaaos8d1lv2e5ali265h">&nbsp;&nbsp;全部上传成功</a>
+</h3>
+</body>
+</html>
