@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="这是接口测试套件">
+    <test name="这是接口测试模块">
+        <classes>
+            <class name="com.tingzi.action.TestBucket4EverLand">
+                <parameter name="bucketName" value="xiaoting-bucket"></parameter>
+                <methods>
+                    <include name="TestBucketExtra"></include>
+                    <include name="TestBucketUsage"></include>
+                    <include name="TestBucketOverview"></include>
+                    <include name="TestBucketOverview1"></include>
+                    <include name="TestBucketOverview_BasicSettings"></include>
+                    <include name="TestBucketOverview_Domainlist"></include>
+                    <include name="TestBucketStatistics_24H_Traffic"></include>
+                    <include name="TestBucketStatistics_24H_Requests"></include>
+                    <include name="TestBucketStatistics_24H_StorageUsed"></include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!--配置extentreport的监听器-->
+    <listeners>
+        <!-- <listener class-name="com.vimalselvam.testng.listener.ExtentTestNgFormatter"/> 自带的监听器类界面样式很难看，没有css样式，需要重写监听类-->
+        <listener class-name="com.tingzi.reportlister.ExtentTestNGIReportLister"/>
+    </listeners>
+</suite>
